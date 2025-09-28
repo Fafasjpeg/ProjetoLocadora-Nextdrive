@@ -1,0 +1,5 @@
+body { font-family: Arial; margin:0; background:#F3F4F6; }
+header { background:#2563EB; color:white; padding:10px; display:flex; align-items:center; justify-content:center; gap:10px; text-align:center; }
+.logo { width:40px; border-radius:50%; }
+main { padding:20px; max-width:600px; margin:auto; }
+a { display:inline-block; margin-top:15px; background:#2563EB; color:white; padding:8px 12px; border-radius:5px; text-decoration:none; }

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reserva</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/reserva.css') }}">
+</head>
+<body>
+  <header>
+    <img src="img/imglogo.png" alt="Logo" class="logo">
+    <h1>NextDrive</h1>
+  </header>
+
+  <main>
+    <h2>Reserva do Veículo</h2>
+    <div class="carro">
+      <img src="img/cars/car1.jpg" alt="Carro escolhido">
+      <h3>Hatch Compacto</h3>
+      <p>R$ 99/dia</p>
+    </div>
+    <form>
+      <label>Data de Retirada</label>
+      <input type="date">
+      <label>Data de Devolução</label>
+      <input type="date">
+      <button type="submit">Confirmar Reserva</button>
+    </form>
+  </main>
+</body>
+</html>

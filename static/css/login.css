@@ -1,0 +1,58 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #F3F4F6; /* neutro claro */
+  color: #111827;      /* neutro escuro */
+  text-align: center;
+}
+
+header {
+  background: #2563EB; /* azul primário */
+  color: white;
+  padding: 10px;
+}
+
+header .logo {
+  width: 60px;
+  border: 2px solid white; /* contorno branco na logo */
+  border-radius: 50%;
+}
+
+main {
+  padding: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  background: #0EA5E9; /* ciano destaque */
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #2563EB; /* azul */
+}
+
+footer {
+  background: #111827;
+  color: white;
+  padding: 10px;
+  margin-top: 20px;
+}

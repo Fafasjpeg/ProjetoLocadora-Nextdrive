@@ -1,0 +1,93 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #F3F4F6;
+  color: #111827;
+}
+
+header {
+  background: #2563EB;
+  color: white;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header .logo {
+  width: 50px;
+  border-radius: 50%;
+}
+
+nav a {
+  margin-left: 10px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+main {
+  padding: 20px;
+  text-align: center;
+}
+
+.filtros {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.filtros input,
+.filtros select {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.filtros button {
+  padding: 8px 12px;
+  background: #0EA5E9;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.veiculos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.carro {
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  width: 200px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.carro img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.carro a {
+  display: inline-block;
+  margin-top: 8px;
+  background: #2563EB;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+footer {
+  background: #111827;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  margin-top: 20px;
+}

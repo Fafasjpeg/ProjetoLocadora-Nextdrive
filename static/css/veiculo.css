@@ -1,0 +1,5 @@
+body { font-family: Arial; margin:0; background:#F3F4F6; text-align:center; }
+header { background:#2563EB; color:white; padding:10px; display:flex; align-items:center; justify-content:center; gap:10px; }
+.logo { width:40px; border-radius:50%; }
+.carro { width:250px; border-radius:8px; margin:20px; }
+a { display:inline-block; margin-top:15px; background:#22C55E; color:white; padding:8px 12px; border-radius:5px; text-decoration:none; }

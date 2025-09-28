@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home - Locadora</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+</head>
+<body>
+  <header>
+    <img src="img/imglogo.png" alt="Logo" class="logo">
+    <h1>NextDrive</h1>
+    <nav>
+      <a href="/login">Entrar</a>
+      <a href="/cadastro">Cadastrar</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Encontre seu próximo carro</h2>
+    <p>Escolha um veículo e faça sua reserva rapidamente.</p>
+
+    <div class="filtros">
+      <input type="text" placeholder="Buscar veículo...">
+      <select>
+        <option>Todos</option>
+        <option>Hatch</option>
+        <option>Sedan</option>
+        <option>SUV</option>
+      </select>
+      <button>Buscar</button>
+    </div>
+
+    <section class="veiculos">
+      <div class="carro">
+        <img src="img/cars/car1.jpg" alt="Hatch compacto">
+        <h3>Hatch Compacto</h3>
+        <p>R$ 99/dia</p>
+        <a href="/reserva">Reservar</a>
+      </div>
+
+      <div class="carro">
+        <img src="img/cars/car2.jpg" alt="Sedan Confort">
+        <h3>Sedan Confort</h3>
+        <p>R$ 139/dia</p>
+        <a href="/reserva">Reservar</a>
+      </div>
+
+      <div class="carro">
+        <img src="img/cars/car3.jpg" alt="SUV Espaçoso">
+        <h3>SUV Espaçoso</h3>
+        <p>R$ 199/dia</p>
+        <a href="/reserva">Reservar</a>
+      </div>
+
+      <div class="carro">
+        <img src="img/cars/car4.jpg" alt="Executivo Premium">
+        <h3>Executivo Premium</h3>
+        <p>R$ 269/dia</p>
+        <a href="/reserva">Reservar</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 NextDrive</p>
+  </footer>
+</body>
+</html>

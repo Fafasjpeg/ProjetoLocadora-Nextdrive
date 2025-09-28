@@ -1,0 +1,7 @@
+body { font-family: Arial; margin:0; background:#F3F4F6; text-align:center; }
+header { background:#2563EB; color:white; padding:10px; display:flex; align-items:center; justify-content:center; gap:10px; }
+.logo { width:50px; border-radius:50%; }
+.carro img { width:200px; border-radius:8px; }
+form { display:flex; flex-direction:column; gap:10px; max-width:300px; margin:20px auto; text-align:left; }
+input, button { padding:8px; border-radius:5px; border:1px solid #ccc; }
+button { background:#2563EB; color:white; border:none; cursor:pointer; }

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagamento</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/pagamento.css') }}">
+</head>
+<body>
+  <header>
+    <img src="img/imglogo.png" class="logo" alt="Logo">
+    <h1>Pagamento</h1>
+  </header>
+
+  <main>
+    <form>
+      <input type="text" placeholder="Número do cartão">
+      <input type="text" placeholder="Nome no cartão">
+      <input type="text" placeholder="Validade (MM/AA)">
+      <input type="text" placeholder="CVV">
+      <button type="submit">Pagar</button>
+    </form>
+  </main>
+</body>
+</html>

@@ -1,0 +1,18 @@
+Tutorial de como fazer o commit da alteração do arquivo pelo terminal do Vscode(pode ser pelo próprio codespace do github)
+git init
+    - inicia o git
+
+git remote add origin https://github.com/seu-usuario/nome-repo.git //trocar pelo endereço do projeto aq no GitHub
+    - conexao com o link HTTPS
+
+git add .   
+    - adiciona as alterações dos codigos
+
+git commit -m "mensagem do commit"   
+    - armazena essas alterações no commit e da Nome
+
+git branch -M main   
+    - faz o branch
+
+git push -u origin main     
+    - faz o push ja ta salvo la no github

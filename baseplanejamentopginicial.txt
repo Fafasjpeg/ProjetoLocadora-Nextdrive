@@ -1,0 +1,118 @@
+Topo (header)
+
+* Logo no canto esquerdo.
+* Menu principal no centro: Veículos, Ofertas, Frota, Seguros.
+* Canto direito:
+
+        * Ícone/telefone para contato.
+        * Botão Login (leva para tela de registro/entrar).
+        * Se quiser, opção de idioma/moeda.
+
+
+Seção inicial (home)
+
+* Banner grande com imagem de destaque (carro ou viagem).
+* Caixa de pesquisa (widget central) com:
+
+        * Local de retirada.
+        * Local de devolução (opcional).
+        * Data e hora de retirada/devolução.
+        * Tipo de veículo.
+        * Botão Pesquisar.
+
+
+Resultados de busca
+
+* Filtros do lado esquerdo (tipo de carro, preço, transmissão, combustível, etc.).
+* Lista de veículos no centro (cartões com: foto, nome do modelo, preço/dia, atributos básicos e botão Selecionar).
+* Botão ou aba para visualizar no Mapa (opcional).
+
+
+Detalhe do veículo
+
+* Fotos do carro.
+* Informações principais (modelo, categoria, atributos).
+* Preço por dia + preço total estimado.
+* Opções extras (seguro, GPS, cadeirinha).
+* Botão grande Reservar agora.
+
+
+Login / Registro
+
+* Página com abas: Registrar e Entrar
+* Registro: Nome, E-mail, CPF, Telefone, Senha.
+* Entrar: E-mail e Senha.
+
+
+ Rodapé (footer)
+
+* Links institucionais (Quem somos, Política, Termos).
+* Formas de pagamento (ícones de cartões).
+* Contatos e redes sociais.
+
+
+
+ Tela: Detalhe do carro (quando a pessoa clica em um veículo)
+
+* Topo igual ao do site (logo, menu, login, etc.).
+* Fotos do veículo (galeria com uma foto grande e miniaturas).
+* Informações principais:
+
+        * Nome e modelo do carro.
+        * Categoria (Econômico, Sedan, SUV, etc.).
+        * Atributos com ícones (número de passageiros, bagagem, ar-condicionado, câmbio).
+
+* Preço:
+
+        * Valor por dia.
+        * Valor total da reserva estimado.
+
+* Extras / Serviços adicionais:
+
+        * Seguro.
+        * GPS.
+        * Cadeirinha infantil.
+
+* Botão destacado: Reservar agora.
+
+
+ Tela: Colocar carro para alugar (para usuários que têm carro)
+
+* Topo igual (logo, menu, login).
+* Título da página: "Cadastre seu veículo para aluguel".
+* Formulário de cadastro do carro:
+
+        * Marca e modelo.
+        * Ano de fabricação.
+        * Categoria (Econômico, Sedan, SUV, Van etc.).
+        * Quilometragem atual.
+        * Transmissão (manual/automático).
+        * Combustível.
+        * Número de passageiros.
+        * Foto(s) do veículo (upload).
+        * Valor sugerido por dia.
+
+* Campo de localização(cidade/estado onde o carro estará disponível).
+* Botão principal: Cadastrar veículo.
+
+
+
+Tela: Confirmação de reserva
+
+* Resumo do veículo escolhido (foto, modelo, preço).
+* Resumo da locação:
+
+        * Datas de retirada e devolução.
+        * Local de retirada/devolução.
+
+* Informações do cliente (nome, CPF, contato).
+* Resumo financeiro (valor total + taxas).
+* Botão: Finalizar reserva.
+
+
+ Tela: Perfil do usuário
+
+* Dados pessoais (nome, e-mail, telefone, CPF).
+* Minhas reservas: lista de carros já alugados.
+* Meus carros cadastrados: lista de veículos que a pessoa colocou para alugar.
+* Botões: Editar perfil / Adicionar carro.
