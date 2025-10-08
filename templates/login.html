@@ -8,7 +8,7 @@
 </head>
 <body>
   <header>
-    <img src="img/imglogo.png" alt="Logo da Locadora" class="logo">
+    <img src="{{ url_for('static', filename='img/imglogo.png') }}" alt="Logo da Locadora" class="logo">
     <h1>Locadora de Veículos NextDrive</h1>
   </header>
 
@@ -16,19 +16,46 @@
     <h2>Entrar</h2>
     <form>
       <label for="email">E-mail:</label>
-      <input type="email" id="email" name="email" required>
+      <input type="email" id="email" name="email" required placeholder="Digite seu e-mail">
 
       <label for="senha">Senha:</label>
-      <input type="password" id="senha" name="senha" required>
+      <div class="password-wrapper">
+        <input type="password" id="senha" name="senha" required placeholder="Digite sua senha">
+        <button type="button" class="toggle-password" aria-label="Mostrar senha" aria-pressed="false" alt="Mostrar senha">
+          O
+        </button>
+      </div>
 
       <button type="submit">Entrar</button>
     </form>
 
-    <p>Ainda não tem conta? <a href="/cadastro">Cadastre-se</a></p>
+    <p class="cadastro">Ainda não tem conta? <a href="/cadastro">Cadastre-se</a></p>
+    <p class="redefinir">Esqueceu a senha? <a href="/redefinirsenha">Redefina-a</a></p>
   </main>
 
   <footer>
-    <p>&copy; 2025 Locadora de Veículos</p>
+    <p>&copy; 2025 Locadora de Veículos NextDrive</p>
   </footer>
+
+  <script>
+    // Mostrar/ocultar senha
+    document.querySelector('.toggle-password').addEventListener('click', function () {
+      const senhaInput = document.getElementById('senha');
+      const isHidden = senhaInput.type === 'password';
+      senhaInput.type = isHidden ? 'text' : 'password';
+      this.setAttribute('aria-pressed', isHidden);
+    });
+
+    // Validação simples de e-mail
+    document.querySelector('form').addEventListener('submit', function (event) {
+      const email = document.getElementById('email').value;
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!regex.test(email)) {
+        alert('Por favor, insira um e-mail válido.');
+        alert('Exemplo: texto@texto.com');
+        event.preventDefault();
+      }
+    });
+  </script>
 </body>
 </html>

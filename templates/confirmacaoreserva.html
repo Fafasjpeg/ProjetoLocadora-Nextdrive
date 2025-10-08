@@ -8,16 +8,25 @@
 </head>
 <body>
   <header>
-    <img src="img/imglogo.png" class="logo" alt="Logo">
+    <img src="{{ url_for('static', filename='img/imglogo.png') }}" alt="Logo" class="logo">
     <h1>NextDrive</h1>
   </header>
 
-  <main>
-    <h2>Reserva Confirmada ✓</h2>
-    <p>Código da reserva: <strong>ND-123456</strong></p>
-    <p>Um e-mail foi enviado com os detalhes.</p>
-    <a href="perfil.html">Minhas Reservas</a>
-    <a href="home.html">Voltar ao Início</a>
+  <main class="confirmation-container">
+    <div class="confirmation-card">
+      <h2 class="confirmation-title">Reserva Confirmada ✓</h2>
+      <p class="confirmation-code">Código da reserva: <strong>ND-123456</strong></p>
+      <p class="confirmation-message">Um e-mail foi enviado com os detalhes da sua reserva.</p>
+      
+      <div class="confirmation-buttons">
+        <a href="/perfil" class="btn btn-primary">Minhas Reservas</a>
+        <a href="/home" class="btn btn-secondary">Voltar ao Início</a>
+      </div>
+    </div>
   </main>
+
+  <footer>
+    <p>&copy; 2025 NextDrive</p>
+  </footer>
 </body>
 </html>

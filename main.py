@@ -42,17 +42,13 @@ def perfil():
 def login():
     return render_template('login.html')
 
-@app.route("/recuperarsenha")
-def recuperarsenha():
-    return render_template('recuperarsenha.html')
+@app.route("/redefinirsenha")
+def redefinirsenha():
+    return render_template('redefinir.html')
 
 @app.route("/pagamento")
 def pagamento():
     return render_template('pagamento.html')
-
-@app.route("/confirmacao")
-def confirmacao():
-    return render_template('confirmacao.html')
 
 @app.route("/reserva")
 def reserva():
@@ -61,7 +57,6 @@ def reserva():
 @app.route("/confirmacaoreserva")
 def confirmacaoreserva():
     return render_template('confirmacaoreserva.html') #teste para ver html
-
 
 if __name__ == "__main__":
     app.run(debug=True)

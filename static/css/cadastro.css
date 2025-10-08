@@ -1,6 +1,126 @@
-body { font-family: Arial; margin:0; background:#F3F4F6; text-align:center; }
-header { background:#2563EB; color:white; padding:10px; display:flex; align-items:center; justify-content:center; gap:10px; }
-.logo { width:50px; border-radius:50%; }
-form { display:flex; flex-direction:column; gap:10px; max-width:300px; margin:20px auto; }
-input { padding:8px; border-radius:5px; border:1px solid #ccc; }
-button { background:#22C55E; color:white; border:none; padding:8px; border-radius:5px; cursor:pointer; }
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #F3F4F6;
+  color: #111827;
+  text-align: center;
+}
+
+header {
+  background: #1e1e2f;
+  color: white;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  left: 30px;
+}
+
+/* Centraliza o título */
+header h1 {
+  margin: 0;
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+main {
+  margin-top: 30px;
+}
+
+h1, h2 {
+  margin-bottom: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 340px;
+  background: white;
+  margin: 20px auto;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+label {
+  font-weight: bold;
+  color: #1F2937;
+  margin-bottom: 4px;
+}
+
+input {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: #2563EB;
+  box-shadow: 0 0 4px rgba(37, 99, 235, 0.4);
+}
+
+button {
+  background: #22C55E;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #16A34A;
+}
+
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding-right: 44px; /* espaço pro botão do olho */
+  box-sizing: border-box;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  color: #4B5563;
+  transition: color 0.3s ease;
+}
+
+.toggle-password:hover {
+  background: transparent;
+  color: #2563EB;
+}
+
+.toggle-password[aria-pressed="true"] svg {
+  opacity: 0.8;
+  color: #2563EB;
+}
