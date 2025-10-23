@@ -22,11 +22,29 @@
     </section>
 
     <form>
-      <label for="retirada">Data de Retirada</label>
-      <input type="date" id="retirada" required>
+      <label for="dataretirada">Data de Retirada</label>
+      <input type="date" id="dataretirada" name="dataretirada" required>
 
-      <label for="devolucao">Data de Devolução</label>
-      <input type="date" id="devolucao" required>
+      <label for="agenciaretirada">Agência de Retirada</label>
+      <select name="agenciaretirada" id="agenciaretirada" required>
+        <option value="">Selecione</option>
+        <!-- colocar as agencias registradas no banoc usando o jinja dps -->
+        <option value="aeroporto">Aeroporto</option>
+        <option value="centro">Centro da Cidade</option>
+        <option value="estacao">Estação de Trem</option>
+      </select>
+
+      <label for="datadevolucao">Data de Devolução</label>
+      <input type="date" id="datadevolucao" name="datadevolucao" required>
+
+      <label for="agenciadevolucao">Agência de Retirada</label>
+      <select name="agenciadevolucao" id="agenciadevolucao" required>
+        <option value="">Selecione</option>
+        <!-- colocar as agencias registradas no banoc usando o jinja dps -->
+        <option value="aeroporto">Aeroporto</option>
+        <option value="centro">Centro da Cidade</option>
+        <option value="estacao">Estação de Trem</option>
+      </select>
 
       <button type="submit">Confirmar Reserva</button>
     </form>

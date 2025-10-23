@@ -23,7 +23,7 @@
 
         <label for="senha">Nova senha</label>
         <div class="password-wrapper">
-          <input type="password" id="senha" placeholder="Digite sua nova senha" required>
+          <input type="password" id="senha" name="senha" placeholder="Digite sua nova senha" required>
           <button type="button" class="toggle-password" onclick="togglePassword('senha', this)">
             O
           </button>
@@ -31,7 +31,7 @@
 
         <label for="confirmar">Confirmar senha</label>
         <div class="password-wrapper">
-          <input type="password" id="confirmar" placeholder="Confirme sua senha" required>
+          <input type="password" id="confirmar" name="senha2" placeholder="Confirme sua senha" required>
           <button type="button" class="toggle-password" onclick="togglePassword('confirmar', this)">
             O
           </button>
@@ -53,7 +53,7 @@
       const input = document.getElementById(id);
       const isPassword = input.type === "password";
       input.type = isPassword ? "text" : "password";
-      button.textContent = isPassword ? "x" : "O";
+      button.textContent = isPassword ? "X" : "O";
     }
   </script>
 </body>

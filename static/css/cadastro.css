@@ -51,6 +51,28 @@ form {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   text-align: left;
 }
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #ffffff;
+  color: #111827;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  appearance: none; /* remove estilo padrão */
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+select:hover {
+  background-color: #f3f4f6;
+}
+
+select:focus {
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+  border-color: #2563EB;
+}
 
 label {
   font-weight: bold;
@@ -69,7 +91,11 @@ input {
 input:focus {
   outline: none;
   border-color: #2563EB;
-  box-shadow: 0 0 4px rgba(37, 99, 235, 0.4);
+  box-shadow: 0 0 4px rgba(37, 99, 235, 0.3);
+}
+
+input:hover {
+    background-color: #fcfcfcfb;
 }
 
 button {

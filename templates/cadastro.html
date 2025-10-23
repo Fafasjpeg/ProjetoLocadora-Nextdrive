@@ -14,14 +14,16 @@
 
   <main>
     <h2>Cadastro do Cliente</h2>
-    <form action="/cadastro_endereco" method="POST" enctype="multipart/form-data">
+    <form action="/cadastro" method="POST" enctype="multipart/form-data">
+
       <label for="nome">Nome completo</label>
-      <input type="text" id="nome" name="nome" required>
+      <input type="text" id="nome" name="nome" maxlength="200" required>
 
       <label for="email">E-mail</label>
-      <input type="email" id="email" name="email" required>
+      <input type="email" id="email" name="email" maxlength="200" required>
 
       <label for="senha">Senha</label>
+
                 <!-- icone pra descobrir a senha -->
       <div class="password-wrapper">
         <input type="password" id="senha" name="senha" required aria-describedby="toggle-senha">
@@ -55,26 +57,26 @@
 
       <label for="telefone">Telefone</label>
       <input type="text" id="telefone" name="telefone" maxlength="15" required>
-    </form>
+
       <h2>Endereço do Cliente</h2>
-    <form action="/salvar_cadastro" method="POST">
+
       <label for="logradouro">Logradouro (Nome da Rua, Avenida, etc)</label>
-      <input type="text" id="logradouro" name="logradouro" required>
+      <input type="text" id="logradouro" name="logradouro" maxlength="250" required>
 
       <label for="numero">Número</label>
-      <input type="number" id="numero" name="numero" required>
+      <input type="number" id="numero" name="numero" maxlength="6" required>
 
       <label for="bairro">Bairro</label>
-      <input type="text" id="bairro" name="bairro" required>
+      <input type="text" id="bairro" name="bairro" maxlength="100" required>
 
       <label for="cep">CEP</label>
       <input type="text" id="cep" name="cep" maxlength="8" required>
 
       <label for="complemento">Complemento</label>
-      <input type="text" id="complemento" name="complemento">
+      <input type="text" id="complemento" name="complemento" maxlength="200">
 
       <label for="cidade">Cidade</label>
-      <input type="text" id="cidade" name="cidade" required>
+      <input type="text" id="cidade" name="cidade" maxlength="100" required>
 
       <label for="estado">Estado</label>
       <select id="estado" name="estado" required>
@@ -111,6 +113,7 @@
       <button type="submit">Finalizar Cadastro</button>
     </form>
   </main>
+  
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const senhaInput = document.getElementById('senha');
