@@ -1,0 +1,134 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #F3F4F6;
+  color: #111827;
+  text-align: center;
+}
+
+header {
+  background: #1e1e2f;
+  color: white;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  left: 30px;
+}
+
+main {
+  margin-top: 30px;
+}
+
+h1, h2, h3 {
+  margin-bottom: 10px;
+}
+
+.opcoes-pagamento {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.opcao {
+  background: white;
+  border: 2px solid #2563EB;
+  color: #2563EB;
+  padding: 15px 25px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.opcao:hover {
+  background: #2563EB;
+  color: white;
+}
+
+.formulario-pagamento {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 360px;
+  background: white;
+  margin: 0 auto;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.oculto {
+  display: none;
+}
+
+label {
+  font-weight: bold;
+  color: #1F2937;
+  margin-bottom: 4px;
+}
+
+input {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: #2563EB;
+  box-shadow: 0 0 4px rgba(37, 99, 235, 0.4);
+}
+
+.linha-dupla {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.linha-dupla div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  background: #22C55E;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #16A34A;
+}
+
+.qrcode {
+  width: 180px;
+  height: 180px;
+  margin: 10px auto;
+  display: block;
+}
+
+.copiado-msg {
+  color: #22C55E;
+  font-weight: bold;
+  margin-top: 8px;
+}

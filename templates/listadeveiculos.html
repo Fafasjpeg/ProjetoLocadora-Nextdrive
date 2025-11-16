@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Veículos</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/listadeveiculos.css') }}">
+</head>
+<body>
+  <header>
+    <img src="{{ url_for('static', filename='img/imglogo.png') }}" class="logo" alt="Logo">
+    <h1>Lista de Veículos</h1>
+  </header>
+  <p>
+    {% with mensagens = get_flashed_messages(with_categories=true) %}
+      {% if mensagens %}
+        {% for categoria, msg in mensagens %}
+          <div class="flash {{ categoria }}">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+  </p>
+
+  <main>
+    <div class="grid">
+      <div class="carro">
+        <img src="{{ url_for('static', filename='img/cars/car1.jpg') }}" alt="Hatch compacto">
+        <h3>Hatch Compacto</h3>
+        <p>R$ 99/dia</p>
+        <a href="/reserva" class="btn">Reservar</a>
+      </div>
+
+      {% for v in veiculos %}
+      <div class="carro">
+          <img src="{{ url_for('static', filename='img/cars/' ~ v.imagem) }}" alt="{{ v.modelo }}">
+
+          <h3>{{ v.marca }} {{ v.modelo }}</h3>
+
+          <p>R$ {{ "%.2f"|format(v.valor_diario) }}/dia</p>
+
+          <a href="{{ url_for('reserva', veiculo_id=v.id) }}" class="btn-reservar">
+            Reservar
+          </a>
+      </div>
+      {% endfor %}
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reserva Confirmada</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/confirmacaoreserva.css') }}">
+</head>
+
+<body>
+<header>
+    <img src="{{ url_for('static', filename='img/imglogo.png') }}" class="logo" alt="Logo">
+    <h1>NextDrive</h1>
+</header>
+
+<main class="confirmation-container">
+    <div class="confirmation-card">
+
+        <h2 class="confirmation-title">Reserva Confirmada </h2>
+        <p class="confirmation-code">
+            Código da reserva: 
+            <strong>ND-{{ aluguel.id_aluguel }}</strong>
+        </p>
+        <p>
+        {% with mensagens = get_flashed_messages(with_categories=true) %}
+          {% if mensagens %}
+            {% for categoria, msg in mensagens %}
+              <div class="flash {{ categoria }}">{{ msg }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        </p>
+
+        <p class="confirmation-message">
+            Olá <strong>{{ cliente.nome }}</strong>, sua reserva foi concluída com sucesso!
+        </p>
+
+        <hr>
+
+        <!-- INFORMAÇÕES DO VEÍCULO -->
+        <h3>📌 Dados do Veículo</h3>
+        <p><strong>Modelo:</strong> {{ veiculo.modelo }}</p>
+        <p><strong>Marca:</strong> {{ veiculo.marca }}</p>
+        <p><strong>Categoria:</strong> {{ veiculo.categoria }}</p>
+        <p><strong>Placa:</strong> {{ veiculo.placa }}</p>
+
+        <hr>
+
+        <!-- INFORMAÇÕES DO ALUGUEL -->
+        <h3>📅 Detalhes da Reserva</h3>
+        <p><strong>Retirada:</strong> {{ aluguel.data_retirada }} — 
+            Agência: {{ aluguel.agencia_retirada.nome }} — {{ aluguel.agencia_retirada.logradouro }}, {{ aluguel.agencia_retirada.numero }}</p>
+
+        <p><strong>Devolução:</strong> {{ aluguel.data_devolutiva }} —
+            Agência: {{ aluguel.agencia_devolucao.nome }} — {{ aluguel.agencia_devolucao.logradouro }}, {{ aluguel.agencia_devolucao.numero }}</p>
+
+        <p><strong>Plano selecionado:</strong> {{ aluguel.plano }}</p>
+        <p><strong>Dias alugados:</strong> {{ aluguel.quantidade_dias }}</p>
+
+        <hr>
+
+        <!-- PAGAMENTO -->
+        <h3>💳 Pagamento</h3>
+
+        <p><strong>Método:</strong>
+            {% if pagamento.forma_pagamento == 'pix' %}
+                Pix
+            {% elif pagamento.forma_pagamento == 'credito' %}
+                Cartão de Crédito
+            {% elif pagamento.forma_pagamento == 'debito' %}
+                Cartão de Débito
+            {% endif %}
+        </p>
+
+        {% if pagamento.forma_pagamento == 'credito' %}
+            <p><strong>Parcelas:</strong> {{ pagamento.parcelas }}x</p>
+        {% endif %}
+
+        <p><strong>Valor do Aluguel:</strong> R$ {{ "%.2f"|format(pagamento.valor_aluguel) }}</p>
+        <p><strong>Valor Total:</strong> R$ {{ "%.2f"|format(pagamento.valor_total) }}</p>
+
+        <hr>
+
+        <p class="info-final">
+            Um e-mail com todos os detalhes foi enviado para você.
+        </p>
+
+        <div class="confirmation-buttons">
+            <a href="/perfil" class="btn btn-primary">Minhas Reservas</a>
+            <a href="/home" class="btn btn-secondary">Voltar ao Início</a>
+        </div>
+
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2025 NextDrive</p>
+</footer>
+</body>
+</html>

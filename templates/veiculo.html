@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalhes do Veículo - {{ veiculo.marca }} {{ veiculo.modelo }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/veiculo.css') }}">
+</head>
+<body>
+  <header>
+    <img src="{{ url_for('static', filename='img/imglogo.png') }}" class="logo" alt="Logo">
+    <h1>{{ veiculo.marca }} {{ veiculo.modelo }}</h1>
+  </header>
+
+  <main>
+    <p>
+    {% with mensagens = get_flashed_messages(with_categories=true) %}
+      {% if mensagens %}
+        {% for categoria, msg in mensagens %}
+          <div class="flash {{ categoria }}">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    </p>
+    <!-- IMAGEM DO VEÍCULO -->
+    <img src="{{ url_for('static', filename='img/cars/' ~ veiculo.imagem) }}" class="carro" alt="{{ veiculo.marca }} {{ veiculo.modelo }}">
+
+    <!-- DETALHES -->
+    <h2>{{ veiculo.marca }} {{ veiculo.modelo }}</h2>
+    <p><strong>Preço diário:</strong> R$ {{ "%.2f"|format(veiculo.valor_diario) }}/dia</p>
+    
+    {% if veiculo.descricao %}
+      <p>{{ veiculo.descricao }}</p>
+    {% endif %}
+
+    <!-- BOTÃO RESERVAR -->
+    <a href="{{ url_for('reserva', id_veiculo=veiculo.id_veiculo) }}" class="btn-reservar">Reservar</a>
+  </main>
+</body>
+</html>

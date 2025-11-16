@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil - NextDrive</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/perfil.css') }}">
+</head>
+<body>
+  <header>
+    <img src="{{ url_for('static', filename='img/imglogo.png') }}" alt="Logo" class="logo">
+    <h1>NextDrive</h1>
+  </header>
+
+  <main>
+    <section class="perfil-card">
+
+      <!-- FOTO DE PERFIL -->
+      <div class="foto-perfil">
+        <img src="{{ url_for('static', filename='img/default-user.jpg') }}" alt="Foto de perfil">
+      </div>
+
+      <h2>Meu Perfil</h2>
+
+      <!-- INFORMAÇÕES DO CLIENTE -->
+      <div class="info">
+        <p><strong>Nome:</strong> {{ cliente.nome }}</p>
+        <p><strong>Email:</strong> {{ cliente.email }}</p>
+        <p><strong>Data de Nascimento:</strong> {{ cliente.data_de_nasci }}</p>
+        <p><strong>CPF:</strong> {{ cliente.cpf }}</p>
+      </div>
+      <a href="/redefinirsenha"> Redefina sua senha </a>
+
+      <h3>Meus Aluguéis</h3>
+
+      {% if alugueis %}
+        <ul class="lista-alugueis">
+
+          {% for a in alugueis %}
+            <li class="item-aluguel">
+              <p><strong>ID Aluguel:</strong> {{ a.id_aluguel }}</p>
+              <p><strong>Carro:</strong> {{ a.veiculo.marca }} {{ a.veiculo.modelo }}</p>
+              <p><strong>Retirada:</strong> {{ a.data_retirada }}</p>
+              <p><strong>Devolução:</strong> {{ a.data_devolutiva }}</p>
+            </li>
+          {% endfor %}
+
+        </ul>
+
+      {% else %}
+        <p>Você ainda não possui aluguéis registrados.</p>
+      {% endif %}
+
+      <a href="/home" class="btn-voltar">Voltar</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 NextDrive</p>
+  </footer>
+</body>
+</html>

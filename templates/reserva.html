@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reserva</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/reserva.css') }}">
+</head>
+<body>
+  <header>
+    <img src="{{ url_for('static', filename='img/imglogo.png') }}" alt="Logo" class="logo">
+    <h1>NextDrive</h1>
+  </header>
+
+  <main>
+    <h2>Reserva do Veículo</h2>
+
+    <section class="carro">
+      <!-- IMAGEM DO VEÍCULO ESCOLHIDO -->
+      <img src="{{ url_for('static', filename=veiculo.imagem) }}" alt="{{ veiculo.nome }}">
+      
+      <!-- NOME DO VEÍCULO -->
+      <h3>{{ veiculo.nome }}</h3>
+
+      <!-- PREÇO DO VEÍCULO -->
+      <p>R$ {{ veiculo.preco }}/dia</p>
+    </section>
+
+    <form action="{{ url_for('reserva') }}" method="POST">
+      <p>
+      {% with mensagens = get_flashed_messages(with_categories=true) %}
+        {% if mensagens %}
+          {% for categoria, msg in mensagens %}
+            <div class="flash {{ categoria }}">{{ msg }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+      </p>
+
+      <label for="dataretirada">Data de Retirada</label>
+      <input type="date" id="dataretirada" name="dataretirada" required>
+
+      <select name="agenciaretirada" required>
+          <option value="" disabled selected>Escolha a agência de retirada</option>
+          {% for a in agencias %}
+              <option value="{{ a.id_agencia }}">{{ a.nome }}</option>
+          {% endfor %}
+      </select>
+
+      <label for="datadevolucao">Data de Devolução</label>
+      <input type="date" id="datadevolucao" name="datadevolucao" required>
+
+      <select name="agenciadevolucao" required>
+          <option value="" disabled selected>Escolha a agência de devolução</option>
+          {% for a in agencias %}
+              <option value="{{ a.id_agencia }}">{{ a.nome }}</option>
+          {% endfor %}
+      </select>
+
+      <label for="plano">Observações</label>
+      <input type="text" id="plano" name="plano" placeholder="Observações adicionais">
+
+      <!-- IMPORTANTE: CARREGAR QUAL VEÍCULO TÁ SENDO RESERVADO -->
+      <input type="hidden" name="id_veiculo" value="{{ veiculo.id_veiculo }}">
+
+      <button type="submit">Confirmar Reserva</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 NextDrive</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redefinir Senha</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/redefinir.css') }}">
+</head>
+<body>
+  <header>
+    <img src="{{ url_for('static', filename='img/imglogo.png') }}" alt="Logo da Locadora" class="logo">
+    <h1>Redefinir Senha</h1>
+  </header>
+
+  <main>
+    <section class="container">
+      <h2>Crie uma nova senha</h2>
+      <p>Insira uma nova senha segura para sua conta.</p>
+      <p>{% with mensagens = get_flashed_messages(with_categories=true) %}
+        {% if mensagens %}
+          {% for categoria, msg in mensagens %}
+            <div class="flash {{ categoria }}">{{ msg }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+      </p>
+
+      <form action="{{ url_for('redefinirsenha') }}", method="POST">
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required placeholder="Digite seu e-mail">
+
+        <label for="senha">Nova senha</label>
+        <div class="password-wrapper">
+          <input type="password" id="senha" name="senha" placeholder="Digite sua nova senha" required>
+          <button type="button" class="toggle-password" onclick="togglePassword('senha', this)">
+            O
+          </button>
+        </div>
+
+        <label for="confirmar">Confirmar senha</label>
+        <div class="password-wrapper">
+          <input type="password" id="confirmar" name="senha2" placeholder="Confirme sua senha" required>
+          <button type="button" class="toggle-password" onclick="togglePassword('confirmar', this)">
+            O
+          </button>
+        </div>
+
+        <button type="submit">Salvar nova senha</button>
+      </form>
+
+      <a href="/login" class="voltar">Voltar ao login</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 NextDrive</p>
+  </footer>
+
+  <script>
+    function togglePassword(id, button) {
+      const input = document.getElementById(id);
+      const isPassword = input.type === "password";
+      input.type = isPassword ? "text" : "password";
+      button.textContent = isPassword ? "X" : "O";
+    }
+  </script>
+</body>
+</html>

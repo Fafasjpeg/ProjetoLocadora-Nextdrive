@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagamento</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/pagamento.css') }}">
+</head>
+<body>
+  <header>
+    <img src="{{ url_for('static', filename='img/imglogo.png') }}" class="logo" alt="Logo">
+    <h1>NextDrive</h1>
+  </header>
+
+  <form id="paymentForm" action="/pagamento/{{ id_aluguel }}" method="POST">
+
+  <input type="hidden" name="payment_method" id="payment_method" value="">
+
+  <p>
+  {% with mensagens = get_flashed_messages(with_categories=true) %}
+    {% if mensagens %}
+      {% for categoria, msg in mensagens %}
+        <div class="flash {{ categoria }}">{{ msg }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+  </p>
+
+  <div class="opcoes-pagamento">
+    <button type="button" class="opcao" data-metodo="credito">💳 Crédito</button>
+    <button type="button" class="opcao" data-metodo="debito">🏧 Débito</button>
+    <button type="button" class="opcao" data-metodo="pix">⚡ Pix</button>
+  </div>
+
+  <!-- cartão -->
+  <div id="formCartao" class="oculto">
+    <h3 id="tituloCartao">Pagamento com Cartão</h3>
+
+    <input type="text" name="numero_cartao" id="numero-cartao" placeholder="0000 0000 0000 0000">
+    <input type="text" name="nome_cartao" id="nome-cartao" placeholder="Nome no cartão">
+    <input type="text" name="validade" id="validade" placeholder="MM/AA">
+    <input type="text" name="cvv" id="cvv" placeholder="CVV">
+
+    <div id="parcelasContainer" class="oculto">
+      <label for="parcelas">Parcelas</label>
+      <select id="parcelas" name="parcelas">
+        <option value="1">1x</option>
+        <option value="2">2x</option>
+        <option value="3">3x</option>
+        <option value="4">4x</option>
+        <option value="5">5x</option>
+        <option value="6">6x</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- PIX -->
+  <div id="pixContainer" class="oculto">
+    <h3>Pagamento via Pix</h3>
+    <input type="text" readonly value="11972751430" id="codigoPix" name="pix_chave">
+    <!-- depois fazer botão para confirmar ou ate gerar QR e enviar ao backend -->
+  </div>
+
+  <button type="submit">Confirmar pagamento</button>
+</form>
+
+<script>
+  const botoes = document.querySelectorAll('.opcao');
+  const paymentMethodInput = document.getElementById('payment_method');
+  const formCartao = document.getElementById('formCartao');
+  const pixContainer = document.getElementById('pixContainer');
+  const parcelasContainer = document.getElementById('parcelasContainer');
+
+  botoes.forEach(botao => {
+    botao.addEventListener('click', () => {
+      const metodo = botao.dataset.metodo;
+
+      // limpar visuais
+      botoes.forEach(b => b.classList.remove('ativa'));
+      botao.classList.add('ativa');
+
+      // definir hidden que será enviado
+      paymentMethodInput.value = metodo;
+
+      // mostrar/esconder blocos
+      formCartao.classList.add('oculto');
+      pixContainer.classList.add('oculto');
+      parcelasContainer.classList.add('oculto');
+
+      if (metodo === 'credito') {
+        formCartao.classList.remove('oculto');
+        parcelasContainer.classList.remove('oculto');
+      } else if (metodo === 'debito') {
+        formCartao.classList.remove('oculto');
+      } else if (metodo === 'pix') {
+        pixContainer.classList.remove('oculto');
+      }
+    });
+  });
+
+  // opcional: validar antes de enviar
+  document.getElementById('paymentForm').addEventListener('submit', e => {
+    const metodo = paymentMethodInput.value;
+    if (!metodo) {
+      e.preventDefault();
+      alert('Selecione um método de pagamento antes de continuar.');
+      return;
+    }
+    // aqui você pode rodar validações específicas por método
+    // ex: se metodo==='credito' validar número do cartão, cvv, parcelas, etc.
+  });
+</script>
+</body>
+</html>

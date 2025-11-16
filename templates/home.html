@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home - NextDrive</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+</head>
+<body>
+  <header>
+    <img src="{{ url_for('static', filename='img/imglogo.png') }}" alt="Logo" class="logo">
+    <h1>NextDrive</h1>
+    <nav>
+      <a href="/perfil">Conta</a>
+      <!--ver se coloca cadastro ou login e como ver isso ai-->
+    </nav>
+  </header>
+
+  <main>
+    <section class="intro">
+      <h2>Encontre seu próximo carro</h2>
+      <p>Escolha um veículo e faça sua reserva rapidamente.</p>
+    </section>
+    <p>
+    {% with mensagens = get_flashed_messages(with_categories=true) %}
+      {% if mensagens %}
+        {% for categoria, msg in mensagens %}
+          <div class="flash {{ categoria }}">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    </p>
+
+    <div class="filtros">
+      <form action="/home" method="get">
+
+        <label for="categoria">Filtrar por categoria:</label>
+        
+        <select name="categoria" id="categoria">
+          <option value="">Todas</option>
+          <option value="SUV">SUV</option>
+          <option value="Sedan">Sedan</option>
+          <option value="Hatch">Hatch</option>
+          <option value="Luxo">Luxo</option>
+        </select>
+
+        <button type="submit">Filtrar</button>
+
+      </form>
+    </div>
+
+    <section class="veiculos">
+      <div class="carro">
+        <img src="{{ url_for('static', filename='img/cars/car1.jpg') }}" alt="Hatch compacto">
+        <h3>Hatch Compacto</h3>
+        <p>R$ 99/dia</p>
+        <a href="/reserva">Reservar</a>
+      </div>
+
+      {% for v in veiculos %}
+      <div class="carro">
+          <img src="{{ url_for('static', filename='img/cars/' ~ v.imagem) }}" alt="{{ v.modelo }}">
+
+          <h3>{{ v.marca }} {{ v.modelo }}</h3>
+
+          <p>R$ {{ "%.2f"|format(v.valor_diario) }}/dia</p>
+
+          <a href="{{ url_for('reserva', veiculo_id=v.id) }}" class="btn-reservar">
+            Reservar
+          </a>
+      </div>
+      {% endfor %}
+
+    </section>
+  </main>
+
+  <footer>
+    <p><a href="/termos">Termos</a> & <a href="/privacidade">Privacidade</a></p>
+    <p>&copy; 2025 NextDrive</p>
+  </footer>
+</body>
+</html>

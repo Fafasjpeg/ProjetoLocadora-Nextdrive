@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro de Cliente - NextDrive</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/cadastro.css') }}">
+</head>
+<body>
+  <header>
+    <img src="{{ url_for('static', filename='img/imglogo.png') }}" alt="Logo" class="logo">
+    <h1>NextDrive</h1>
+  </header>
+
+  <main>
+    <h2>Cadastro do Cliente</h2>
+    <form action="/cadastro" method="POST" enctype="multipart/form-data">
+
+      <label for="nome">Nome completo</label>
+      <input type="text" id="nome" name="nome" maxlength="200" required>
+
+      <label for="email">E-mail</label>
+      <input type="email" id="email" name="email" maxlength="200" required>
+
+      <label for="senha">Senha</label>
+
+                <!-- icone pra descobrir a senha -->
+      <div class="password-wrapper">
+        <input type="password" id="senha" name="senha" required aria-describedby="toggle-senha">
+        <button type="button" class="toggle-password" id="toggle-senha" aria-pressed="false" aria-label="Mostrar senha">
+          <svg id="icon-eye" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+        </button>
+      </div>
+
+      <label for="dataNascimento">Data de Nascimento</label>
+      <input type="date" id="dataNascimento" name="dataNascimento" required>
+
+      <label for="cnh">Número da CNH</label>
+      <input type="text" id="cnh" name="cnh" maxlength="11" required>
+
+      <label for="genero">Gênero</label>
+      <select id="genero" name="genero" required>
+        <option value="">Selecione</option>
+        <option value="M">Masculino</option>
+        <option value="F">Feminino</option>
+        <option value="O">Outro</option>
+      </select>
+
+      <label for="foto">Foto de Perfil</label>
+      <input type="file" id="foto" name="foto" accept="image/*">
+
+      <label for="cpf">CPF</label>
+      <input type="text" id="cpf" name="cpf" maxlength="11" required>
+
+      <label for="telefone">Telefone</label>
+      <input type="text" id="telefone" name="telefone" maxlength="15" required>
+
+      <h2>Endereço do Cliente</h2>
+
+      <label for="logradouro">Logradouro (Nome da Rua, Avenida, etc)</label>
+      <input type="text" id="logradouro" name="logradouro" maxlength="250" required>
+
+      <label for="numero">Número</label>
+      <input type="number" id="numero" name="numero" maxlength="6" required>
+
+      <label for="bairro">Bairro</label>
+      <input type="text" id="bairro" name="bairro" maxlength="100" required>
+
+      <label for="cep">CEP</label>
+      <input type="text" id="cep" name="cep" maxlength="8" required>
+
+      <label for="complemento">Complemento</label>
+      <input type="text" id="complemento" name="complemento" maxlength="200">
+
+      <label for="cidade">Cidade</label>
+      <input type="text" id="cidade" name="cidade" maxlength="100" required>
+
+      <label for="estado">Estado</label>
+      <select id="estado" name="estado" required>
+        <option value="">Selecione</option>
+        <option value="AC">Acre</option>
+        <option value="AL">Alagoas</option>
+        <option value="AP">Amapá</option>
+        <option value="AM">Amazonas</option>
+        <option value="BA">Bahia</option>
+        <option value="CE">Ceará</option>
+        <option value="DF">Distrito Federal</option>
+        <option value="ES">Espírito Santo</option>
+        <option value="GO">Goiás</option>
+        <option value="MA">Maranhão</option>
+        <option value="MT">Mato Grosso</option>
+        <option value="MS">Mato Grosso do Sul</option>
+        <option value="MG">Minas Gerais</option>
+        <option value="PA">Pará</option>
+        <option value="PB">Paraíba</option>
+        <option value="PR">Paraná</option>
+        <option value="PE">Pernambuco</option>
+        <option value="PI">Piauí</option>
+        <option value="RJ">Rio de Janeiro</option>
+        <option value="RN">Rio Grande do Norte</option>
+        <option value="RS">Rio Grande do Sul</option>
+        <option value="RO">Rondônia</option>
+        <option value="RR">Roraima</option>
+        <option value="SC">Santa Catarina</option>
+        <option value="SP">São Paulo</option>
+        <option value="SE">Sergipe</option>
+        <option value="TO">Tocantins</option>
+      </select>
+
+      <button type="submit">Finalizar Cadastro</button>
+    </form>
+  </main>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const senhaInput = document.getElementById('senha');
+      const toggleBtn = document.getElementById('toggle-senha');
+      const icon = document.getElementById('icon-eye');
+
+      const eyeSvg = {
+        open: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a20.11 20.11 0 0 1 5.06-6.06"></path>
+                <path d="M1 1l22 22"></path>
+              </svg>`,
+        closed: `<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>`
+      };
+
+      // inicia com ícone "fechado" 
+      toggleBtn.addEventListener('click', function () {
+        const isHidden = senhaInput.type === 'password';
+        senhaInput.type = isHidden ? 'text' : 'password';
+        toggleBtn.setAttribute('aria-pressed', isHidden ? 'true' : 'false');
+        toggleBtn.setAttribute('aria-label', isHidden ? 'Esconder senha' : 'Mostrar senha');
+
+
+        toggleBtn.querySelector('svg').outerHTML = isHidden ? eyeSvg.open : eyeSvg.closed;
+      });
+    });
+
+    document.getElementById("formCadastro").addEventListener("submit", function(event) {
+      const emailInput = document.getElementById("email");
+      const erro = document.getElementById("erroEmail");
+      
+      const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!emailValido.test(emailInput.value.trim())) {
+        event.preventDefault(); // impede o envio do form
+        erro.style.display = "block";
+        emailInput.style.borderColor = "red";
+      } else {
+        erro.style.display = "none";
+        emailInput.style.borderColor = "#ccc";
+      }
+    });
+
+  </script>
+</body>
+</html>
