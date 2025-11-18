@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro de Departamento - NextDrive</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/cadastro.css') }}">
+</head>
+
+<body>
+  <header>
+    <img src="{{ url_for('static', filename='img/imglogo.png') }}" alt="Logo" class="logo">
+    <h1>Cadastro de Departamento</h1>
+
+    <nav>
+      <a href="/homeadm">Home</a>
+      <a href="/cadastrodepartamento">Cadastrar Departamento</a>
+      <a href="/logoutadm">Sair</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Novo Departamento</h2>
+
+    {% with mensagens = get_flashed_messages(with_categories=true) %}
+      {% if mensagens %}
+        {% for categoria, msg in mensagens %}
+          <div class="flash {{ categoria }}">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form action="/cadastrodepartamento" method="POST">
+
+      <h3>Dados do Departamento</h3>
+
+      <label for="nome">Nome do Departamento:</label>
+      <input type="text" id="nome" name="nome" required>
+
+      <label for="descricao">Descrição:</label>
+      <input type="text" id="descricao" name="descricao">
+
+      <label for="funcao">Função:</label>
+      <input type="text" id="funcao" name="funcao">
+
+      <label for="complemento">Complemento:</label>
+      <input type="text" id="complemento" name="complemento">
+
+      <label for="situacao">Situação:</label>
+      <select id="situacao" name="situacao" required>
+        <option value="">Selecione</option>
+        <option value="Ativo">Ativo</option>
+        <option value="Inativo">Inativo</option>
+      </select>
+
+      <button type="submit">Cadastrar Departamento</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 NextDrive - Administração</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastrar Cargo - NextDrive</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/cadastro.css') }}">
+</head>
+<body>
+
+  <header>
+    <img src="{{ url_for('static', filename='img/imglogo.png') }}" alt="Logo" class="logo">
+    <h1>NextDrive - Administração</h1>
+
+    <nav>
+      <a href="/homeadm">Home</a>
+      <a href="/cadastrocargo">Cadastro de Cargo</a>
+      <a href="/logoutadm">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Cadastrar Cargo</h2>
+
+    {% with mensagens = get_flashed_messages(with_categories=true) %}
+      {% if mensagens %}
+        {% for categoria, msg in mensagens %}
+          <div class="flash {{ categoria }}">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form action="/cadastrocargo" method="POST">
+
+      <label for="nome">Nome do Cargo *</label>
+      <input type="text" id="nome" name="nome" required placeholder="Digite o nome do cargo">
+
+      <label for="funcao">Função (Opcional)</label>
+      <input type="text" id="funcao" name="funcao" placeholder="Descreva a função do cargo">
+
+      <button type="submit">Cadastrar Cargo</button>
+    </form>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2025 NextDrive - Administração</p>
+  </footer>
+
+</body>
+</html>

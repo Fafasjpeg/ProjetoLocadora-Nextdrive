@@ -51,21 +51,22 @@
 
     <section class="veiculos">
       <div class="carro">
-        <img src="{{ url_for('static', filename='img/cars/car1.jpg') }}" alt="Hatch compacto">
+        <img src="{{ url_for('static', filename='img/cars/carromisterio.webp') }}" alt="Hatch compacto">
         <h3>Hatch Compacto</h3>
         <p>R$ 99/dia</p>
-        <a href="/reserva">Reservar</a>
+        <a href="{{ url_for('reserva', id_veiculo=1) }}">Reservar</a>
+
       </div>
 
       {% for v in veiculos %}
       <div class="carro">
-          <img src="{{ url_for('static', filename='img/cars/' ~ v.imagem) }}" alt="{{ v.modelo }}">
+          <!--img src="{{ url_for('static', filename='img/cars/carromisterio.webp') }}" alt="{{ v.modelo }}"-->
 
           <h3>{{ v.marca }} {{ v.modelo }}</h3>
 
           <p>R$ {{ "%.2f"|format(v.valor_diario) }}/dia</p>
 
-          <a href="{{ url_for('reserva', veiculo_id=v.id) }}" class="btn-reservar">
+          <a href="{{ url_for('reserva', id_veiculo=v.id_veiculo) }}" class="btn-reservar">
             Reservar
           </a>
       </div>

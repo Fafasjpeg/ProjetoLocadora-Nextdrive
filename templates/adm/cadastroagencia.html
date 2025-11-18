@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro de Agência - NextDrive</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/cadastro.css') }}">
+</head>
+
+<body>
+  <!-- ====== CABEÇALHO ====== -->
+  <header>
+    <img src="{{ url_for('static', filename='img/imglogo.png') }}" alt="Logo" class="logo">
+    <h1>Cadastro de Agência</h1>
+
+    <nav>
+      <a href="/homeadm">Home</a>
+      <a href="/cadastroagencia">Cadastrar Agência</a>
+      <a href="/logoutadm">Sair</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Nova Agência</h2>
+
+    <!-- MENSAGENS -->
+    {% with mensagens = get_flashed_messages(with_categories=true) %}
+      {% if mensagens %}
+        {% for categoria, msg in mensagens %}
+          <div class="flash {{ categoria }}">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form action="/cadastroagencia" method="POST">
+
+      <h3>Dados da Agência</h3>
+
+      <label for="nome">Nome da Agência:</label>
+      <input type="text" id="nome" name="nome" required>
+
+      <label for="telefone">Telefone:</label>
+      <input type="text" id="telefone" name="telefone" required>
+
+      <label for="email">E-mail:</label>
+      <input type="email" id="email" name="email" required>
+
+      <h3>Endereço</h3>
+
+      <label for="logradouro">Logradouro:</label>
+      <input type="text" id="logradouro" name="logradouro" required>
+
+      <label for="numero">Número:</label>
+      <input type="number" id="numero" name="numero" required>
+
+      <label for="bairro">Bairro:</label>
+      <input type="text" id="bairro" name="bairro" required>
+
+      <label for="cep">CEP:</label>
+      <input type="text" id="cep" name="cep" maxlength="8" required>
+
+      <label for="complemento">Complemento:</label>
+      <input type="text" id="complemento" name="complemento">
+
+      <label for="cidade">Cidade:</label>
+      <input type="text" id="cidade" name="cidade" required>
+
+      <label for="estado">Estado:</label>
+      <input type="text" id="estado" name="estado" required>
+
+      <button type="submit">Cadastrar Agência</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 NextDrive - Administração</p>
+  </footer>
+
+</body>
+</html>

@@ -1,6 +1,8 @@
 from flask import Flask, render_template, redirect, url_for, make_response, session, request, flash
 import os
+from sqlalchemy import func
 from datetime import datetime
+from decimal import Decimal
 from cripto_itens import Seguranca
 from BDD_operacao import Operacao
 from BDD_conexao import Cliente, Endereco, Veiculo, Aluguel, Servico, Fornecedor, Agencia, Empregado, Departamento, Cargo, Pagamento, _Session
@@ -14,7 +16,7 @@ operacao = Operacao()
 
 @app.route("/")
 def base():
-    return redirect(url_for('index'))
+    return redirect(url_for('home'))
 
 @app.route("/index")
 def index():
@@ -47,22 +49,35 @@ def home():
         veiculos = operacao.filtrar_veiculos_por_categoria(categoria)
     else:
         veiculos = operacao.listar_todos_veiculos()
+    
+    db.close()
 
     return render_template('home.html', cliente=cliente, veiculos=veiculos)
 
 
 @app.route("/listadeveiculos")
 def listadeveiculos():
+    
+    id_cliente = session.get('cliente_id')
+    if not id_cliente:
+        return redirect(url_for('login'))
+    
     veiculos = operacao.listar_todos_veiculos()
     return render_template('listadeveiculos.html', veiculos=veiculos)
 
 
 @app.route("/listadeveiculos/<int:id_veiculo>")
 def veiculo(id_veiculo):
+    
+    id_cliente = session.get('cliente_id')
+    if not id_cliente:
+        return redirect(url_for('login'))
+    
     db = _Session()
 
     veiculo = db.query(Veiculo).filter(Veiculo.id_veiculo == id_veiculo).first()
-
+    
+    db.close()
     #validacao
     if not veiculo:
         flash("Veículo não encontrado.", "error")
@@ -72,10 +87,20 @@ def veiculo(id_veiculo):
 
 @app.route("/termos")
 def termos():
+    
+    id_cliente = session.get('cliente_id')
+    if not id_cliente:
+        return redirect(url_for('login'))
+    
     return render_template('termos.html')
 
 @app.route("/privacidade")
 def privacidade():
+    
+    id_cliente = session.get('cliente_id')
+    if not id_cliente:
+        return redirect(url_for('login'))
+    
     return render_template('privacidade.html')
 
 @app.route("/cadastro", methods=['GET', 'POST'])
@@ -103,7 +128,7 @@ def cadastro():
 
             # endereco dados
             logradouro = request.form.get('logradouro')
-            numero = request.form.get('numero')
+            numero = int(request.form.get('numero'))
             bairro = request.form.get('bairro')
             cep = request.form.get('cep')
             complemento = request.form.get('complemento')
@@ -125,10 +150,9 @@ def cadastro():
                 estado=estado
             )
             db.add(novo_endereco)
-            db.flush()  # garante id_endereco
+            db.flush()  # retorna id_endereco
 
             # converte data nascimento
-            
             data_nascimento = datetime.strptime(data_nascimento, "%Y-%m-%d").date()
 
             # novo cliente
@@ -156,6 +180,8 @@ def cadastro():
             print(str(e))
             flash("Erro ao cadastrar. Tente novamente.", "error")
             return redirect(url_for('cadastro'))
+        
+    db.close()
 
     return render_template('cadastro.html')
 
@@ -196,6 +222,8 @@ def login():
         # busca pelo email
         cliente = db.query(Cliente).filter(Cliente.email == email).first()
 
+        db.close()
+        
         if not cliente:
             flash("E-mail não cadastrado.", "error")
             db.close()
@@ -251,6 +279,7 @@ def redefinirsenha():
         # atualiza a senha 
         cliente.senha = senha_nova_hash
         db.commit()
+        db.close()
 
         flash("Senha alterada com sucesso!", "success")
         return redirect(url_for('login'))
@@ -281,8 +310,8 @@ def reserva(id_veiculo):
         plano = request.form.get("plano")  
         data_retirada = request.form.get('dataretirada')
         data_devolucao = request.form.get('datadevolucao')
-        agencia_retirada = request.form.get('agenciaretirada')
-        agencia_devolucao = request.form.get('agenciadevolucao')
+        agencia_retirada = int(request.form.get('agenciaretirada')) # arrumei com int()
+        agencia_devolucao = int(request.form.get('agenciadevolucao'))
 
         # converter para datas
         dt_r = datetime.strptime(data_retirada, "%Y-%m-%d")
@@ -298,10 +327,10 @@ def reserva(id_veiculo):
         aluguel = Aluguel(
             id_agencia_retirada=agencia_retirada,
             id_agencia_devolucao=agencia_devolucao,
-            data_retirada=data_retirada,
-            hora_retirada="00:00",
+            data_retirada = datetime.strptime(data_retirada, "%Y-%m-%d").date(),
+            hora_retirada= time(0,0), # hora fixa de retirada
             data_aluguel=date.today(),
-            data_devolutiva=data_devolucao,
+            data_devolucao = datetime.strptime(data_devolucao, "%Y-%m-%d").date(),
             quantidade_dias=quantidade_dias,
             plano=plano,                   
             id_cliente=id_cliente,
@@ -339,8 +368,8 @@ def pagamento():
     if request.method == 'POST':
 
         metodo = request.form.get('payment_method') 
-        parcelas = request.form.get('parcelas') or 1
-        valor_aluguel = veiculo.valor_diario * aluguel.quantidade_dias
+        parcelas = int(request.form.get('parcelas') or 1)
+        valor_aluguel = Decimal(veiculo.valor_diario) * Decimal(aluguel.quantidade_dias)
 
         pagamento = Pagamento(
             forma_pagamento=metodo,
@@ -429,8 +458,505 @@ def confirmacaoreserva():
     veiculo = db.query(Veiculo).get(aluguel.id_veiculo)
     pagamento = db.query(Pagamento).get(id_pagamento)
     cliente = db.query(Cliente).get(id_cliente)
+    
+    db.close()
         
     return render_template('confirmacaoreserva.html', aluguel=aluguel, veiculo=veiculo, pagamento=pagamento, cliente=cliente)
+
+@app.route("/limpa_sessoes")
+def limpa_sessoes():
+    # limpa todas as sessoes de aluguel e pagamento
+    session.pop('aluguel_id', None)
+    session.pop('pagamento_id', None)
+    flash("Sessões de aluguel e pagamento limpas.", "success")
+    return redirect(url_for('home'))
+
+@app.route("/loginadm", methods=['GET', 'POST'])
+def loginadm():
+
+    if request.method == 'POST':
+        db = _Session()
+
+        email = request.form.get('email')
+        senha_inserida = request.form.get('senha')
+
+        # busca empregado pelo email
+        empregado = db.query(Empregado).filter(Empregado.email == email).first()
+
+        db.close()
+
+        if not empregado:
+            flash("E-mail não cadastrado.", "error")
+            return redirect(url_for('loginadm'))
+
+        # valida hash da senha
+        if not Seguranca.verificar(senha_inserida, empregado.senha):
+            flash("Senha incorreta.", "error")
+            return redirect(url_for('loginadm'))
+
+        # guarda id do empregado na sessão
+        session['empregado_id'] = empregado.id_empregado
+
+        return redirect(url_for('homeadm'))  # coloque o painel que você quiser
+
+    return render_template('adm/loginadm.html')
+
+@app.route("/logoutadm")
+def logoutadm():
+    session.pop('empregado_id', None)  # remove o id do administrador da sessão
+    flash("Logout realizado com sucesso.", "info")
+    return redirect(url_for('loginadm'))
+
+
+@app.route("/cadastroadm", methods=['GET', 'POST'])
+def cadastroadm():
+
+    if request.method == 'POST':
+        db = _Session()
+
+        try:
+            # EMPREGADO DADOS
+            nome = request.form.get('nome')
+            email = request.form.get('email')
+            senha = request.form.get('senha')
+            senha_hash = Seguranca.gerar_hash(senha)
+            cpf = request.form.get('cpf')
+            data_nascimento = request.form.get('dataNascimento')
+            genero = request.form.get('genero')
+            telefone = request.form.get('telefone')
+            salario = request.form.get('salario')
+
+            id_departamento = request.form.get('id_departamento')
+            id_cargo = request.form.get('id_cargo')
+
+            # verifica email único
+            if db.query(Empregado).filter(Empregado.email == email).first():
+                flash("E-mail já cadastrado.", "error")
+                return redirect(url_for('cadastroadm'))
+
+            # verifica cpf único
+            if db.query(Empregado).filter(Empregado.cpf == cpf).first():
+                flash("CPF já cadastrado.", "error")
+                return redirect(url_for('cadastroadm'))
+
+            # ENDERECO DADOS
+            logradouro = request.form.get('logradouro')
+            numero = int(request.form.get('numero'))
+            bairro = request.form.get('bairro')
+            cep = request.form.get('cep')
+            complemento = request.form.get('complemento')
+            cidade = request.form.get('cidade')
+            estado = request.form.get('estado')
+
+            # cria o endereço
+            novo_endereco = Endereco(
+                logradouro=logradouro,
+                numero=numero,
+                bairro=bairro,
+                cep=cep,
+                complemento=complemento,
+                cidade=cidade,
+                estado=estado
+            )
+
+            db.add(novo_endereco)
+            db.flush()  # traz id_endereco
+
+            # formata data nascimento
+            data_nascimento = datetime.strptime(data_nascimento, "%Y-%m-%d").date()
+
+            # novo empregado
+            novo_empregado = Empregado(
+                email=email,
+                senha=senha_hash,
+                cpf=cpf,
+                nome=nome,
+                data_de_nasci=data_nascimento,
+                genero=genero,
+                telefone=telefone,
+                salario=salario,
+
+                id_departamento=id_departamento,
+                id_endereco=novo_endereco.id_endereco,
+                id_cargo=id_cargo
+            )
+
+            db.add(novo_empregado)
+            db.commit()
+
+            flash("Empregado cadastrado com sucesso!", "success")
+            return redirect(url_for('cadastroadm'))
+
+        except Exception as e:
+            db.rollback()
+            print("Erro:", e)
+            flash("Erro ao cadastrar empregado.", "error")
+            return redirect(url_for('cadastroadm'))
+
+        finally:
+            db.close()
+
+    return render_template("adm/cadastroadm.html")
+
+@app.route("/homeadm")
+def homeadm():
+    
+    # verifica se empregado está logado
+    id_empregado = session.get('empregado_id')
+    if not id_empregado:
+        return redirect(url_for('loginadm'))
+
+    db = _Session()
+
+    # busca o empregado logado
+    empregado = db.query(Empregado).filter(Empregado.id_empregado == id_empregado).first()
+
+    db.close()
+
+    if not empregado:
+        flash("Conta não encontrada. Faça login novamente.", "error")
+        session.pop('empregado_id', None)
+        return redirect(url_for('loginadm'))
+
+    return render_template('adm/homeadm.html', empregado=empregado)
+
+@app.route("/cadastrofornecedor", methods=['GET', 'POST'])
+def cadastrofornecedor():
+    
+    #id_empregado = session.get('empregado_id')
+    #if not id_empregado:
+        #return redirect(url_for('loginadm'))
+
+    if request.method == 'POST':
+        db = _Session()
+
+        try:
+            # ======== DADOS DO FORNECEDOR ========
+            cnpj = request.form.get('cnpj')
+            razaosocial = request.form.get('razaosocial')
+            nome_fantasia = request.form.get('nome_fantasia')
+
+            # verifica se já existe CNPJ cadastrado
+            if db.query(Fornecedor).filter(Fornecedor.cnpj == cnpj).first():
+                flash("CNPJ já cadastrado.", "error")
+                db.close()
+                return redirect(url_for('cadastrofornecedor'))
+
+            # ======== FOTO DO FORNECEDOR ========
+            foto = request.files.get('foto')
+            foto_bytes = foto.read() if foto and foto.filename else None
+
+            # ======== ENDEREÇO DO FORNECEDOR ========
+            logradouro = request.form.get('logradouro')
+            numero = int(request.form.get('numero'))
+            bairro = request.form.get('bairro')
+            cep = request.form.get('cep')
+            complemento = request.form.get('complemento')
+            cidade = request.form.get('cidade')
+            estado = request.form.get('estado')
+
+            # cria o endereço
+            novo_endereco = Endereco(
+                logradouro=logradouro,
+                numero=numero,
+                bairro=bairro,
+                cep=cep,
+                complemento=complemento,
+                cidade=cidade,
+                estado=estado
+            )
+
+            db.add(novo_endereco)
+            db.flush()  # garante novo_endereco.id_endereco
+
+            # ======== CRIA O FORNECEDOR ========
+            novo_fornecedor = Fornecedor(
+                cnpj=cnpj,
+                razaosocial=razaosocial,
+                nome_fantasia=nome_fantasia,
+                foto=foto_bytes,
+                id_endereco=novo_endereco.id_endereco
+            )
+
+            db.add(novo_fornecedor)
+            db.commit()
+
+            flash("Fornecedor cadastrado com sucesso!", "success")
+            return redirect(url_for('homeadm'))
+
+        except Exception as e:
+            print(str(e))
+            db.rollback()
+            flash("Erro ao cadastrar fornecedor. Tente novamente.", "error")
+            return redirect(url_for('cadastrofornecedor'))
+
+        finally:
+            db.close()
+
+    return render_template("adm/cadastrofornecedor.html")
+
+@app.route("/cadastroagencia", methods=['GET', 'POST'])
+def cadastroagencia():
+
+    if request.method == 'POST':
+        db = _Session()
+
+        try:
+            # Dados da agência
+            nome = request.form.get('nome')
+            telefone = request.form.get('telefone')
+            email = request.form.get('email')
+
+            # Endereço
+            logradouro = request.form.get('logradouro')
+            numero = int(request.form.get('numero'))
+            bairro = request.form.get('bairro')
+            cep = request.form.get('cep')
+            complemento = request.form.get('complemento')
+            cidade = request.form.get('cidade')
+            estado = request.form.get('estado')
+
+            # Criar objeto Endereco
+            novo_endereco = Endereco(
+                logradouro=logradouro,
+                numero=numero,
+                bairro=bairro,
+                cep=cep,
+                complemento=complemento,
+                cidade=cidade,
+                estado=estado
+            )
+            db.add(novo_endereco)
+            db.flush()  # garante id_endereco
+
+            # Criar Agência
+            nova_agencia = Agencia(
+                nome=nome,
+                telefone=telefone,
+                email=email,
+                id_endereco=novo_endereco.id_endereco
+            )
+            db.add(nova_agencia)
+            db.commit()
+
+            flash("Agência cadastrada com sucesso!", "success")
+            return redirect(url_for('cadastroagencia'))
+
+        except Exception as e:
+            print(str(e))
+            db.rollback()
+            flash("Erro ao cadastrar agência.", "error")
+            return redirect(url_for('homeadm'))
+
+        finally:
+            db.close()
+
+    return render_template('adm/cadastroagencia.html')
+
+@app.route("/cadastroservico", methods=['GET', 'POST'])
+def cadastroservico():
+
+    db = _Session()
+
+    if request.method == 'POST':
+        try:
+            tipo_servico = request.form.get('tipo_servico')
+            nome = request.form.get('nome')
+            preco = request.form.get('preco')
+            id_fornecedor = request.form.get('id_fornecedor')
+
+            # valida fornecedor
+            fornecedor = db.query(Fornecedor).filter_by(id_fornecedor=id_fornecedor).first()
+            if not fornecedor:
+                flash("Fornecedor inválido.", "error")
+                return redirect(url_for('cadastroservico'))
+
+            # cria novo serviço
+            novo_servico = Servico(
+                tipo_servico=tipo_servico,
+                nome=nome,
+                preco=preco,
+                id_fornecedor=id_fornecedor
+            )
+
+            db.add(novo_servico)
+            db.commit()
+
+            flash("Serviço cadastrado com sucesso!", "success")
+            return redirect(url_for('homeadm'))
+
+        except Exception as e:
+            print(e)
+            db.rollback()
+            flash("Erro ao cadastrar serviço.", "error")
+            return redirect(url_for('cadastroservico'))
+
+        finally:
+            db.close()
+
+    # GET → carrega fornecedores para o select
+    fornecedores = db.query(Fornecedor).all()
+    db.close()
+
+    return render_template("adm/cadastroservico.html", fornecedores=fornecedores)
+
+@app.route("/cadastroveiculo", methods=["GET", "POST"])
+def cadastro_veiculo():
+    categorias_validas = ["Sedan", "Hatch", "SUV", "Luxo"]
+    
+    db = _Session()
+
+    if request.method == "POST":
+        valor_diario = request.form.get("valor_diario")
+        data_aquisicao = request.form.get("data_aquisicao")
+        marca = request.form.get("marca")
+        modelo = request.form.get("modelo")
+        placa = request.form.get("placa")
+        cor = request.form.get("cor")
+        quilometragem = request.form.get("quilometragem")
+        categoria = request.form.get("categoria")
+
+        # Validação da categoria
+        if categoria not in categorias_validas:
+            flash("Categoria inválida! Selecione Sedan, Hatch, SUV ou Luxo.")
+            return redirect(url_for("cadastroveiculo"))
+
+        novo_veiculo = Veiculo(
+            valor_diario=valor_diario,
+            data_aquisicao=data_aquisicao if data_aquisicao else None,
+            marca=marca,
+            modelo=modelo,
+            placa=placa,
+            cor=cor,
+            quilometragem=quilometragem,
+            categoria=categoria
+        )
+
+        db.session.add(novo_veiculo)
+        db.session.commit()
+
+        flash("Veículo cadastrado com sucesso!")
+        return redirect(url_for("homeadm"))
+
+    return render_template("cadastroveiculo.html")
+
+@app.route("/cadastrodepartamento", methods=['GET', 'POST'])
+def cadastrodepartamento():
+    db = _Session()
+
+    if request.method == 'POST':
+        try:
+            nome = request.form.get('nome', '').strip()
+            descricao = request.form.get('descricao', '').strip()
+            funcao = request.form.get('funcao', '').strip()
+            complemento = request.form.get('complemento', '').strip()
+            situacao = request.form.get('situacao', '').strip()
+
+            # validação: nome e situacao obrigatórios
+            if not nome or not situacao:
+                flash("Preencha todos os campos obrigatórios.", "error")
+                return redirect(url_for('cadastrodepartamento'))
+
+            # cria novo departamento
+            novo_dep = Departamento(
+                nome=nome,
+                descricao=descricao if descricao else None,
+                funcao=funcao if funcao else None,
+                complemento=complemento if complemento else None,
+                situacao=situacao if situacao else None
+            )
+
+            db.add(novo_dep)
+            db.commit()
+
+            flash("Departamento cadastrado com sucesso!", "success")
+            return redirect(url_for('homeadm'))
+
+        except Exception as e:
+            print("Erro ao cadastrar departamento:", e)
+            db.rollback()
+            flash("Erro ao cadastrar departamento. Tente novamente.", "error")
+            return redirect(url_for('cadastrodepartamento'))
+
+        finally:
+            db.close()
+
+    # GET
+    db.close()
+    return render_template("adm/cadastrodepartamento.html")
+
+@app.route("/cadastrocargo", methods=['GET', 'POST'])
+def cadastrocargo():
+
+    if request.method == 'POST':
+        db = _Session()
+
+        try:
+            nome = request.form.get('nome')
+            funcao = request.form.get('funcao')
+
+            # Trim de espaços
+            nome = nome.strip()
+            funcao = funcao.strip() if funcao else None
+
+            # Nome é obrigatório
+            if not nome:
+                flash("O nome do cargo é obrigatório.", "error")
+                return redirect(url_for('cadastrocargo'))
+
+            # Evita cargos duplicados
+            if db.query(Cargo).filter(Cargo.nome == nome).first():
+                flash("Já existe um cargo cadastrado com esse nome.", "error")
+                return redirect(url_for('cadastrocargo'))
+
+            novo_cargo = Cargo(
+                nome=nome,
+                funcao=funcao if funcao else None
+            )
+
+            db.add(novo_cargo)
+            db.commit()
+
+            flash("Cargo cadastrado com sucesso!", "success")
+            return redirect(url_for('homeadm'))
+
+        except Exception as e:
+            db.rollback()
+            print("Erro ao cadastrar cargo:", str(e))
+            flash("Erro ao cadastrar cargo.", "error")
+            return redirect(url_for('cadastrocargo'))
+
+        finally:
+            db.close()
+
+    return render_template("adm/cadastrocargo.html")
+
+@app.route('/dashboard')
+def dashboard():
+    
+    db = _Session()
+
+    total_alugueis = Aluguel.query.count()
+    faturamento_total = db.session.query(func.sum(Aluguel.valor_total)).scalar() or 0
+
+    veiculos = Veiculo.query.all()
+    fornecedores = Fornecedor.query.all()
+    servicos = Servico.query.all()
+    empregados = Empregado.query.all()
+    agencias = Agencia.query.all()
+    
+    db.close()
+
+    return render_template(
+        'adm/dashboard.html',
+        total_alugueis=total_alugueis,
+        faturamento_total=faturamento_total,
+        veiculos=veiculos,
+        fornecedores=fornecedores,
+        servicos=servicos,
+        empregados=empregados,
+        agencias=agencias
+    )
 
 if __name__ == "__main__":
     app.run(debug=True)

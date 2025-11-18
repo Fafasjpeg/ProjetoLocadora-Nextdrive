@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard - Administrativo</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/adm/dashboard.css') }}">
+
+</head>
+
+<body>
+
+<h1>Dashboard Administrativo</h1>
+
+<div class="card-container">
+    <div class="card">
+        <h2>Total de Aluguéis</h2>
+        <p><strong>{{ total_alugueis }}</strong></p>
+    </div>
+
+    <div class="card">
+        <h2>Faturamento Total</h2>
+        <p><strong>R$ {{ faturamento_total }}</strong></p>
+    </div>
+</div>
+
+<!-- ===================== TABELA DE VEÍCULOS ===================== -->
+
+<h2>Veículos</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>Placa</th>
+        <th>Ações</th>
+    </tr>
+    {% for v in veiculos %}
+    <tr>
+        <td>{{ v.id }}</td>
+        <td>{{ v.marca }}</td>
+        <td>{{ v.modelo }}</td>
+        <td>{{ v.placa }}</td>
+        <td>
+            <button class="action-btn edit">Editar</button>
+            <button class="action-btn delete">Excluir</button>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<!-- ===================== FORNECEDORES ===================== -->
+
+<h2>Fornecedores</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>CNPJ</th>
+        <th>Ações</th>
+    </tr>
+    {% for f in fornecedores %}
+    <tr>
+        <td>{{ f.id }}</td>
+        <td>{{ f.razaosocial }}</td>
+        <td>{{ f.cnpj }}</td>
+        <td>
+            <button class="action-btn edit">Editar</button>
+            <button class="action-btn delete">Excluir</button>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<!-- ===================== SERVIÇOS ===================== -->
+
+<h2>Serviços</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Fornecedor</th>
+        <th>Ações</th>
+    </tr>
+    {% for s in servicos %}
+    <tr>
+        <td>{{ s.id }}</td>
+        <td>{{ s.nome }}</td>
+        <td>{{ s.fornecedor.razaosocial }}</td>
+        <td>
+            <button class="action-btn edit">Editar</button>
+            <button class="action-btn delete">Excluir</button>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<!-- ===================== EMPREGADOS ===================== -->
+
+<h2>Empregados</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Cargo</th>
+        <th>Ações</th>
+    </tr>
+    {% for e in empregados %}
+    <tr>
+        <td>{{ e.id }}</td>
+        <td>{{ e.nome }}</td>
+        <td>{{ e.cargo.nome }}</td>
+        <td>
+            <button class="action-btn edit">Editar</button>
+            <button class="action-btn delete">Excluir</button>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<!-- ===================== AGÊNCIAS ===================== -->
+
+<h2>Agências</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Telefone</th>
+        <th>Cidade</th>
+        <th>Ações</th>
+    </tr>
+    {% for a in agencias %}
+    <tr>
+        <td>{{ a.id }}</td>
+        <td>{{ a.nome }}</td>
+        <td>{{ a.email }}</td>
+        <td>{{ a.telefone }}</td>
+        <td>{{ a.endereco.cidade }}</td>
+        <td>
+            <button class="action-btn edit">Editar</button>
+            <button class="action-btn delete">Excluir</button>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>

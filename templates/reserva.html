@@ -16,17 +16,14 @@
     <h2>Reserva do Veículo</h2>
 
     <section class="carro">
-      <!-- IMAGEM DO VEÍCULO ESCOLHIDO -->
-      <img src="{{ url_for('static', filename=veiculo.imagem) }}" alt="{{ veiculo.nome }}">
-      
-      <!-- NOME DO VEÍCULO -->
-      <h3>{{ veiculo.nome }}</h3>
+      <img src="{{ url_for('static', filename='img/cars/carromisterio.webp') }}" alt="{{ veiculo.marca }} {{ veiculo.modelo }}">
 
-      <!-- PREÇO DO VEÍCULO -->
-      <p>R$ {{ veiculo.preco }}/dia</p>
+      <h3>{{ veiculo.marca }} {{ veiculo.modelo }}</h3>
+
+      <p>R$ {{ "%.2f"|format(veiculo.valor_diario) }}/dia</p>
     </section>
 
-    <form action="{{ url_for('reserva') }}" method="POST">
+    <form action="{{ url_for('reserva', id_veiculo=veiculo.id_veiculo) }}" method="POST">
       <p>
       {% with mensagens = get_flashed_messages(with_categories=true) %}
         {% if mensagens %}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Veículo</title>
+</head>
+<body>
+    <h2>Cadastro de Veículo</h2>
+
+    <form action="{{ url_for('cadastroveiculo') }}" method="POST">
+
+        <label>Valor Diário:</label>
+        <input type="number" step="0.01" name="valor_diario" required><br><br>
+
+        <label>Data de Aquisição:</label>
+        <input type="date" name="data_aquisicao"><br><br>
+
+        <label>Marca:</label>
+        <input type="text" name="marca" required><br><br>
+
+        <label>Modelo:</label>
+        <input type="text" name="modelo" required><br><br>
+
+        <label>Placa:</label>
+        <input type="text" name="placa" maxlength="7" required><br><br>
+
+        <label>Cor:</label>
+        <input type="text" name="cor" required><br><br>
+
+        <label>Quilometragem:</label>
+        <input type="number" name="quilometragem" required><br><br>
+
+        <label>Categoria:</label>
+        <select name="categoria" required>
+            <option value="">Selecione</option>
+            <option value="Sedan">Sedan</option>
+            <option value="Hatch">Hatch</option>
+            <option value="SUV">SUV</option>
+            <option value="Luxo">Luxo</option>
+        </select>
+
+        <br><br>
+        <button type="submit">Cadastrar</button>
+
+    </form>
+</body>
+</html>

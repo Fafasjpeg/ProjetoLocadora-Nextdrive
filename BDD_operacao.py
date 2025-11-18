@@ -24,21 +24,23 @@ class Operacao:
             session.add(cliente)
             session.commit()
 
-    def add_Empregado(self,nome,telefone,email, senha,foto,salario,cpf,data_de_nasci,genero):   
+    def add_Empregado(self,nome,telefone,email, senha,salario,cpf,data_de_nasci,genero, id_departamento, id_endereco, id_cargo):   
         with _Session() as session:
             empregado = Empregado(
                 nome=nome,
                 telefone=telefone,
                 email=email,
                 senha=senha, #senha ja vem hashada pelo main.py
-                foto=foto,
                 salario=salario,
                 cpf=cpf,
                 data_de_nasci=data_de_nasci,
                 genero=genero,
+                id_departamento = id_departamento,
+                id_endereco = id_endereco,
+                id_cargo = id_cargo,
                 )
             session.add(empregado)
-            session.commit() 
+            session.flush() 
 
     def add_Endereco(self,logradouro,bairro,numero,cep,complemento,cidade,estado):
         with _Session() as session:
@@ -54,25 +56,30 @@ class Operacao:
             session.add(endereco)
             session.commit() 
             
-    def add_Agencia(self,nome,telefone,email):
+    def add_Agencia(self,nome,telefone,email,id_endereco):
         with _Session() as session:
             agencia = Agencia(
                 nome=nome,
                 telefone=telefone,
-                email=email
+                email=email,
+                id_endereco = id_endereco,
                 )
             session.add(agencia)
             session.commit()                     
 
-    def add_Aluguel(self,data_retirada,hora_retirada,data_aluguel,data_devolutiva,quantidade_dias,plano):
+    def add_Aluguel(self,id_agencia_retirada, id_agencia_devolucao , data_retirada,hora_retirada,data_aluguel,data_devolutiva,quantidade_dias,plano, id_cliente,id_veiculo):
         with _Session() as session:
             aluguel = Aluguel(
+                id_agencia_retirada=id_agencia_retirada,
+                id_agencia_devolucao=id_agencia_devolucao,
                 data_retirada=data_retirada,
                 hora_retirada=hora_retirada,
                 data_aluguel=data_aluguel,
                 data_devolutiva=data_devolutiva,
                 quantidade_dias=quantidade_dias,
-                plano=plano
+                plano=plano,
+                id_cliente=id_cliente,
+                id_veiculo=id_veiculo
                 )
             session.add(aluguel)
             session.commit()                     
@@ -352,16 +359,23 @@ class Operacao:
     def listar_todos_veiculos(self):
         with _Session() as session:
             veiculos = session.query(Veiculo).all()
-            
+
             if not veiculos:
-                return flash("Veículo não encontrado.", "error")
-            
+                flash("Nenhum veículo encontrado.", "error")
+                return []  # <- volta uma lista vazia
+
             return veiculos
            
     def filtrar_veiculos_por_categoria(self, categoria):
         with _Session() as session:
             veiculos = session.query(Veiculo).filter(Veiculo.categoria == categoria).all()
+
+            if not veiculos:
+                flash("Nenhum veículo dessa categoria encontrado.", "error")
+                veiculos=[] # <- volta uma lista vazia
+
             return veiculos
+
         
     def listar_alugueis_por_cliente(self, id_cliente):
         with _Session() as session:
@@ -371,8 +385,11 @@ class Operacao:
     def listar_agencias(self):
         with _Session() as session:
             agencias = session.query(Agencia).all()
+
             if not agencias:
-                return flash("Agências não encontradas.", "error")
+                flash("Nenhuma agência encontrada.", "error")
+                return []  # <-- Retorna lista vazia para evitar erros
+
             return agencias
        
 #fotos_b = b'foto'    

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Administrativa</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+</head>
+
+<body>
+  <!-- ======== CABEÇALHO ======== -->
+  <header>
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <img src="{{ url_for('static', filename='img/imglogo.png') }}" alt="Logo" class="logo">
+      <h1>Painel Administrativo</h1>
+    </div>
+
+    <nav>
+      <a href="{{ url_for('home') }}">Home</a>
+      <a href="{{ url_for('cadastroempregado') }}">Empregados</a>
+      <a href="{{ url_for('cadastrofornecedor') }}">Fornecedores</a>
+      <a href="{{ url_for('cadastrodepartamento') }}">Departamentos</a>
+      <a href="{{ url_for('cadastroveiculo') }}">Veículos</a>
+      <a href="{{ url_for('cadastroagencia') }}">Agências</a>
+      <a href="{{ url_for('logoutadm') }}" style="background:#ef4444; border-radius:5px;">Sair</a>
+    </nav>
+  </header>
+
+  <!-- ======== CONTEÚDO PRINCIPAL ======== -->
+  <main>
+
+    <section class="intro">
+      <h2>Bem-vindo ao Painel Administrativo</h2>
+      <p>Gerencie empregados, fornecedores, cargos, departamentos e muito mais.</p>
+    </section>
+
+    <!-- ======== CARDS PRINCIPAIS ======== -->
+    <div class="veiculos">
+
+      <div class="carro"> <!-- copia formatacao dos veiculos da home original do cliente-->
+        <img src="{{ url_for('static', filename='img/adm_empregado.jpg') }}" alt="Empregados">
+        <h3>Empregados</h3>
+        <p>Gerencie todo o cadastro de funcionários.</p>
+        <a href="{{ url_for('cadastroempregado') }}">Acessar</a>
+      </div>
+
+      <div class="carro">
+        <img src="{{ url_for('static', filename='img/adm_fornecedor.jpg') }}" alt="Fornecedores">
+        <h3>Fornecedores</h3>
+        <p>Cadastro e controle de fornecedores da empresa.</p>
+        <a href="{{ url_for('cadastrofornecedor') }}">Acessar</a>
+      </div>
+
+      <div class="carro">
+        <img src="{{ url_for('static', filename='img/adm_departamento.jpg') }}" alt="Departamentos">
+        <h3>Departamentos</h3>
+        <p>Configure áreas internas e atribuições.</p>
+        <a href="{{ url_for('cadastrodepartamento') }}">Acessar</a>
+      </div>
+
+      <div class="carro">
+        <img src="{{ url_for('static', filename='img/adm_cargo.jpg') }}" alt="Cargos">
+        <h3>Cargos</h3>
+        <p>Gerencie funções e papéis dentro da empresa.</p>
+        <a href="{{ url_for('cadastrocargo') }}">Acessar</a>
+      </div>
+
+      <div class="carro">
+        <img src="{{ url_for('static', filename='img/adm_agencia.jpg') }}" alt="Agencias">
+        <h3>Fornecedores</h3>
+        <p>Cadastro e controle de agências da empresa.</p>
+        <a href="{{ url_for('cadastroagencia') }}">Acessar</a>
+      </div>
+
+      <div class="carro">
+        <img src="{{ url_for('static', filename='img/adm_veiculo.jpg') }}" alt="Agencias">
+        <h3>Fornecedores</h3>
+        <p>Cadastro e controle de veículos da empresa.</p>
+        <a href="{{ url_for('cadastroveiculo') }}">Acessar</a>
+      </div>
+
+      <div class="carro">
+        <img src="{{ url_for('static', filename='img/adm_servico.jpg') }}" alt="Agencias">
+        <h3>Fornecedores</h3>
+        <p>Cadastro e controle de serviços realizado nos carros da empresa.</p>
+        <a href="{{ url_for('cadastroservico') }}">Acessar</a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ======== RODAPÉ ======== -->
+  <footer>
+    <p>© 2025 - Painel Administrativo | Todos os direitos reservados.</p>
+  </footer>
+
+</body>
+</html>

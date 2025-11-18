@@ -1,10 +1,9 @@
 from sqlalchemy import (
     create_engine, Column, Integer, String, ForeignKey,
-    Date, Float, LargeBinary, Table, Numeric, Boolean, Time
+    Date, LargeBinary, Table, Numeric, Boolean, Time
 )
 from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 
-# Conexão e base (mantive exatamente como você pediu)
 Engine = create_engine("mysql+pymysql://root:2008fsfc@localhost:3306/locacaocarro")
 Base = declarative_base()
 _Session = sessionmaker(bind=Engine)
@@ -33,7 +32,7 @@ class Cliente(Base):
     nome = Column(String(255), nullable=False)
     email = Column(String(255), nullable=False)
     senha = Column(String(255), nullable=False)
-    data_de_nasci = Column(Date, nullable=False)   # seu nome existente
+    data_de_nasci = Column(Date, nullable=False)   
     cnh = Column(String(11), nullable=False)
     genero = Column(String(1), nullable=False)
     foto = Column(LargeBinary, nullable=True)
@@ -41,10 +40,9 @@ class Cliente(Base):
     telefone = Column(String(15), nullable=False)
     id_endereco = Column(Integer, ForeignKey('endereco.id_endereco'), nullable=False)
 
-    # relacionamentos (Cliente -> Endereco, Aluguel, Pagamento via Aluguel)
+    # relacionamentos cliente-endereco e cliente-aluguel
     endereco = relationship("Endereco", back_populates="clientes")
     alugueis = relationship("Aluguel", back_populates="cliente")
-    # pagamentos acessíveis via aluguel.pagamentos
 
 class Endereco(Base):
     __tablename__ = 'endereco'
@@ -118,8 +116,6 @@ class Empregado(Base):
     id_departamento = Column(Integer, ForeignKey('departamento.id_departamento'), nullable=False)
     id_endereco = Column(Integer, ForeignKey('endereco.id_endereco'), nullable=False)
     id_cargo = Column(Integer, ForeignKey('cargo.id_cargo'), nullable=False)
-    
-    # criar email e senha pra admin acess
 
     endereco = relationship("Endereco", back_populates="empregados")
     departamento = relationship("Departamento", back_populates="empregados")
@@ -164,7 +160,6 @@ class Veiculo(Base):
     quilometragem = Column(Integer, nullable=False) 
     categoria = Column(String(255), nullable=False)
 
-    foto = Column(LargeBinary, nullable=True)
 
     alugueis = relationship("Aluguel", back_populates="veiculo")
     servicos = relationship("Servico", secondary=VeiculoServico, back_populates="veiculos")
@@ -188,7 +183,7 @@ class Aluguel(Base):
 
     id_aluguel = Column(Integer, primary_key=True)
 
-    # FKs para agência de retirada e devolução (conforme dicionário)
+    # FKs para agência de retirada e devolução 
     id_agencia_retirada = Column(Integer, ForeignKey('agencia.id_agencia'), nullable=False)
     id_agencia_devolucao = Column(Integer, ForeignKey('agencia.id_agencia'), nullable=False)
 
