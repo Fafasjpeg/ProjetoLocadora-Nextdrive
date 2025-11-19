@@ -4,32 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Veículo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cadastro.css') }}">
 </head>
 <body>
+  <header>
+    <img src="{{ url_for('static', filename='img/imglogo.png') }}" alt="Logo" class="logo">
+    <h1>NextDrive</h1>
+    <a href="/homeadm">Home</a>
+  </header>
     <h2>Cadastro de Veículo</h2>
+    <p>
+    {% with mensagens = get_flashed_messages(with_categories=true) %}
+      {% if mensagens %}
+        {% for categoria, msg in mensagens %}
+          <div class="flash {{ categoria }}">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    </p>
 
     <form action="{{ url_for('cadastroveiculo') }}" method="POST">
 
         <label>Valor Diário:</label>
-        <input type="number" step="0.01" name="valor_diario" required><br><br>
+        <input type="number" step="0.01" name="valor_diario" required>
 
         <label>Data de Aquisição:</label>
-        <input type="date" name="data_aquisicao"><br><br>
+        <input type="date" name="data_aquisicao">
 
         <label>Marca:</label>
-        <input type="text" name="marca" required><br><br>
+        <input type="text" name="marca" required>
 
         <label>Modelo:</label>
-        <input type="text" name="modelo" required><br><br>
+        <input type="text" name="modelo" required>
 
         <label>Placa:</label>
-        <input type="text" name="placa" maxlength="7" required><br><br>
+        <input type="text" name="placa" maxlength="7" required>
 
         <label>Cor:</label>
-        <input type="text" name="cor" required><br><br>
+        <input type="text" name="cor" required>
 
         <label>Quilometragem:</label>
-        <input type="number" name="quilometragem" required><br><br>
+        <input type="number" name="quilometragem" required>
 
         <label>Categoria:</label>
         <select name="categoria" required>
@@ -40,7 +55,6 @@
             <option value="Luxo">Luxo</option>
         </select>
 
-        <br><br>
         <button type="submit">Cadastrar</button>
 
     </form>

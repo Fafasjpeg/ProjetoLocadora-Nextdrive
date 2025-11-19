@@ -12,6 +12,16 @@
 
 <h1>Dashboard Administrativo</h1>
 
+<p>
+    {% with mensagens = get_flashed_messages(with_categories=true) %}
+      {% if mensagens %}
+        {% for categoria, msg in mensagens %}
+          <div class="flash {{ categoria }}">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    </p>
+
 <div class="card-container">
     <div class="card">
         <h2>Total de Aluguéis</h2>
@@ -23,6 +33,9 @@
         <p><strong>R$ {{ faturamento_total }}</strong></p>
     </div>
 </div>
+
+<a href="homeadm">Home - Administração</a>
+<a href="home">Home</a>
 
 <!-- ===================== TABELA DE VEÍCULOS ===================== -->
 
@@ -37,7 +50,7 @@
     </tr>
     {% for v in veiculos %}
     <tr>
-        <td>{{ v.id }}</td>
+        <td>{{ v.id_veiculo }}</td>
         <td>{{ v.marca }}</td>
         <td>{{ v.modelo }}</td>
         <td>{{ v.placa }}</td>
@@ -61,8 +74,8 @@
     </tr>
     {% for f in fornecedores %}
     <tr>
-        <td>{{ f.id }}</td>
-        <td>{{ f.razaosocial }}</td>
+        <td>{{ f.id_fornecedor }}</td>
+        <td>{{ f.razao_social }}</td>
         <td>{{ f.cnpj }}</td>
         <td>
             <button class="action-btn edit">Editar</button>
@@ -84,7 +97,7 @@
     </tr>
     {% for s in servicos %}
     <tr>
-        <td>{{ s.id }}</td>
+        <td>{{ s.id_servico }}</td>
         <td>{{ s.nome }}</td>
         <td>{{ s.fornecedor.razaosocial }}</td>
         <td>
@@ -107,7 +120,7 @@
     </tr>
     {% for e in empregados %}
     <tr>
-        <td>{{ e.id }}</td>
+        <td>{{ e.id_empregado }}</td>
         <td>{{ e.nome }}</td>
         <td>{{ e.cargo.nome }}</td>
         <td>
@@ -132,7 +145,7 @@
     </tr>
     {% for a in agencias %}
     <tr>
-        <td>{{ a.id }}</td>
+        <td>{{ a.id_agencia }}</td>
         <td>{{ a.nome }}</td>
         <td>{{ a.email }}</td>
         <td>{{ a.telefone }}</td>

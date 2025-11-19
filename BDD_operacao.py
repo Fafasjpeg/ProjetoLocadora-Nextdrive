@@ -391,6 +391,16 @@ class Operacao:
                 return []  # <-- Retorna lista vazia para evitar erros
 
             return agencias
+        
+    def listar_todos_cargos(self):
+        with _Session() as session:
+            cargos = session.query(Cargo).all()
+
+            if not cargos:
+                flash("Nenhum cargo encontrado.", "error")
+                return []  # retorna lista vazia se não houver registros
+
+            return cargos
        
 #fotos_b = b'foto'    
 #data_nascimento = '01/05/2008'

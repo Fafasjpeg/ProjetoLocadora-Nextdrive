@@ -43,6 +43,17 @@ main {
   padding: 20px;
 }
 
+a{
+  text-decoration: none;
+  color: #2563EB;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+a:hover {
+  text-decoration: underline;
+
+}
+
 .perfil-card {
   background: white;
   padding: 30px;
@@ -110,3 +121,4 @@ footer {
   padding: 10px;
   margin-top: auto;
 }
+

@@ -29,8 +29,10 @@
         <p><strong>Data de Nascimento:</strong> {{ cliente.data_de_nasci }}</p>
         <p><strong>CPF:</strong> {{ cliente.cpf }}</p>
       </div>
-      <a href="/redefinirsenha"> Redefina sua senha </a>
-      <a href="/redefinirsenha"> Entre como Administrador </a>
+      <a href="/redefinirsenha"> Redefina sua senha </a><br>
+      <a href="/loginadm"> Entre como Administrador </a><br>
+      <a href="/logout"> Sair </a>
+
 
       <h3>Meus Aluguéis</h3>
 
@@ -42,7 +44,7 @@
               <p><strong>ID Aluguel:</strong> {{ a.id_aluguel }}</p>
               <p><strong>Carro:</strong> {{ a.veiculo.marca }} {{ a.veiculo.modelo }}</p>
               <p><strong>Retirada:</strong> {{ a.data_retirada }}</p>
-              <p><strong>Devolução:</strong> {{ a.data_devolutiva }}</p>
+              <p><strong>Devolução:</strong> {{ a.data_devolucao }}</p>
             </li>
           {% endfor %}
 

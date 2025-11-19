@@ -49,17 +49,15 @@
         <!-- INFORMAÇÕES DO ALUGUEL -->
         <h3>📅 Detalhes da Reserva</h3>
         <p><strong>Retirada:</strong> {{ aluguel.data_retirada }} — 
-            Agência: {{ aluguel.agencia_retirada.nome }} — {{ aluguel.agencia_retirada.logradouro }}, {{ aluguel.agencia_retirada.numero }}</p>
+            Agência: {{ aluguel.agencia_retirada.nome }} — {{ aluguel.agencia_retirada.endereco.logradouro }}, {{ aluguel.agencia_retirada.endereco.numero }}</p>
 
         <p><strong>Devolução:</strong> {{ aluguel.data_devolutiva }} —
-            Agência: {{ aluguel.agencia_devolucao.nome }} — {{ aluguel.agencia_devolucao.logradouro }}, {{ aluguel.agencia_devolucao.numero }}</p>
+            Agência: {{ aluguel.agencia_devolucao.nome }} — {{ aluguel.agencia_devolucao.endereco.logradouro }}, {{ aluguel.agencia_devolucao.endereco.numero }}</p>
 
-        <p><strong>Plano selecionado:</strong> {{ aluguel.plano }}</p>
         <p><strong>Dias alugados:</strong> {{ aluguel.quantidade_dias }}</p>
 
         <hr>
 
-        <!-- PAGAMENTO -->
         <h3>💳 Pagamento</h3>
 
         <p><strong>Método:</strong>

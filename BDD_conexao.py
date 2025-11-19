@@ -67,7 +67,7 @@ class Fornecedor(Base):
 
     id_fornecedor = Column(Integer, primary_key=True)
     cnpj = Column(String(14), unique=True, nullable=False)
-    razaosocial = Column(String(100), nullable=False)   
+    razao_social = Column(String(100), nullable=False)   
     nome_fantasia = Column(String(100), nullable=True)   
     foto = Column(LargeBinary, nullable=True)
     id_endereco = Column(Integer, ForeignKey('endereco.id_endereco'), nullable=False)
@@ -190,7 +190,7 @@ class Aluguel(Base):
     data_retirada = Column(Date, nullable=False)
     hora_retirada = Column(Time, nullable=True)
     data_aluguel = Column(Date, nullable=False)
-    data_devolutiva = Column(Date, nullable=False)
+    data_devolucao = Column(Date, nullable=False)
     quantidade_dias = Column(Integer, nullable=False)
     plano = Column(String(255), nullable=True)
 

@@ -8,6 +8,15 @@ h1 {
     text-align: center;
     margin-bottom: 30px;
 }
+a {
+    text-decoration: none;
+    background-color: #007bff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: #ffffff;
+    margin-bottom: 20px;
+    display: inline-block;
+}
 
 .card-container {
     display: flex;

@@ -8,6 +8,9 @@ body {
   text-align: center;
 }
 
+a {
+    text-decoration: none;
+}
 
 header {
   background: #1e1e2f;

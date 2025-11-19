@@ -50,13 +50,7 @@
     </div>
 
     <section class="veiculos">
-      <div class="carro">
-        <img src="{{ url_for('static', filename='img/cars/carromisterio.webp') }}" alt="Hatch compacto">
-        <h3>Hatch Compacto</h3>
-        <p>R$ 99/dia</p>
-        <a href="{{ url_for('reserva', id_veiculo=1) }}">Reservar</a>
-
-      </div>
+      
 
       {% for v in veiculos %}
       <div class="carro">

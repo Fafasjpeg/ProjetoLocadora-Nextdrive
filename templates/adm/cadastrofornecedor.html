@@ -11,6 +11,7 @@
   <header>
     <img src="{{ url_for('static', filename='img/imglogo.png') }}" alt="Logo" class="logo">
     <h1>NextDrive</h1>
+    <a href="/homeadm">Home</a>
   </header>
 
   <main>
@@ -48,4 +49,57 @@
       <label for="logradouro">Logradouro</label>
       <input type="text" id="logradouro" name="logradouro" maxlength="255" required>
 
-      <label for="num
+      <label for="numero">Número</label>
+      <input type="number" id="numero" name="numero" required>
+
+      <label for="bairro">Bairro</label>
+      <input type="text" id="bairro" name="bairro" maxlength="255" required>
+
+      <label for="cep">CEP</label>
+      <input type="text" id="cep" name="cep" maxlength="8" required>
+
+      <label for="complemento">Complemento</label>
+      <input type="text" id="complemento" name="complemento" maxlength="100">
+
+      <label for="cidade">Cidade</label>
+      <input type="text" id="cidade" name="cidade" maxlength="100" required>
+
+      <label for="estado">Estado</label>
+      <select id="estado" name="estado" required>
+        <option value="">Selecione</option>
+        <option value="AC">Acre</option>
+        <option value="AL">Alagoas</option>
+        <option value="AP">Amapá</option>
+        <option value="AM">Amazonas</option>
+        <option value="BA">Bahia</option>
+        <option value="CE">Ceará</option>
+        <option value="DF">Distrito Federal</option>
+        <option value="ES">Espírito Santo</option>
+        <option value="GO">Goiás</option>
+        <option value="MA">Maranhão</option>
+        <option value="MT">Mato Grosso</option>
+        <option value="MS">Mato Grosso do Sul</option>
+        <option value="MG">Minas Gerais</option>
+        <option value="PA">Pará</option>
+        <option value="PB">Paraíba</option>
+        <option value="PR">Paraná</option>
+        <option value="PE">Pernambuco</option>
+        <option value="PI">Piauí</option>
+        <option value="RJ">Rio de Janeiro</option>
+        <option value="RN">Rio Grande do Norte</option>
+        <option value="RS">Rio Grande do Sul</option>
+        <option value="RO">Rondônia</option>
+        <option value="RR">Roraima</option>
+        <option value="SC">Santa Catarina</option>
+        <option value="SP">São Paulo</option>
+        <option value="SE">Sergipe</option>
+        <option value="TO">Tocantins</option>
+      </select>
+
+      <button type="submit">Cadastrar Fornecedor</button>
+    </form>
+
+  </main>
+
+</body>
+</html>

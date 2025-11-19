@@ -17,7 +17,8 @@
 
     <nav>
       <a href="{{ url_for('home') }}">Home</a>
-      <a href="{{ url_for('cadastroempregado') }}">Empregados</a>
+      <a href="{{ url_for('dashboard') }}">Dashboard</a>
+      <a href="{{ url_for('cadastroadm') }}">Empregados</a>
       <a href="{{ url_for('cadastrofornecedor') }}">Fornecedores</a>
       <a href="{{ url_for('cadastrodepartamento') }}">Departamentos</a>
       <a href="{{ url_for('cadastroveiculo') }}">Veículos</a>
@@ -32,56 +33,65 @@
     <section class="intro">
       <h2>Bem-vindo ao Painel Administrativo</h2>
       <p>Gerencie empregados, fornecedores, cargos, departamentos e muito mais.</p>
+      <p>
+      {% with mensagens = get_flashed_messages(with_categories=true) %}
+        {% if mensagens %}
+          {% for categoria, msg in mensagens %}
+            <div class="flash {{ categoria }}">{{ msg }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+      </p>
     </section>
 
     <!-- ======== CARDS PRINCIPAIS ======== -->
     <div class="veiculos">
 
       <div class="carro"> <!-- copia formatacao dos veiculos da home original do cliente-->
-        <img src="{{ url_for('static', filename='img/adm_empregado.jpg') }}" alt="Empregados">
+        <img src="{{ url_for('static', filename='img/adm_empregado.png') }}" alt="Empregados">
         <h3>Empregados</h3>
         <p>Gerencie todo o cadastro de funcionários.</p>
-        <a href="{{ url_for('cadastroempregado') }}">Acessar</a>
+        <a href="{{ url_for('cadastroadm') }}">Acessar</a>
       </div>
 
       <div class="carro">
-        <img src="{{ url_for('static', filename='img/adm_fornecedor.jpg') }}" alt="Fornecedores">
+        <img src="{{ url_for('static', filename='img/adm_fornecedor.png') }}" alt="Fornecedores">
         <h3>Fornecedores</h3>
         <p>Cadastro e controle de fornecedores da empresa.</p>
         <a href="{{ url_for('cadastrofornecedor') }}">Acessar</a>
       </div>
 
       <div class="carro">
-        <img src="{{ url_for('static', filename='img/adm_departamento.jpg') }}" alt="Departamentos">
+        <img src="{{ url_for('static', filename='img/adm_departamento.png') }}" alt="Departamentos">
         <h3>Departamentos</h3>
         <p>Configure áreas internas e atribuições.</p>
         <a href="{{ url_for('cadastrodepartamento') }}">Acessar</a>
       </div>
 
       <div class="carro">
-        <img src="{{ url_for('static', filename='img/adm_cargo.jpg') }}" alt="Cargos">
+        <img src="{{ url_for('static', filename='img/adm_cargo.png') }}" alt="Cargos">
         <h3>Cargos</h3>
         <p>Gerencie funções e papéis dentro da empresa.</p>
         <a href="{{ url_for('cadastrocargo') }}">Acessar</a>
       </div>
 
       <div class="carro">
-        <img src="{{ url_for('static', filename='img/adm_agencia.jpg') }}" alt="Agencias">
-        <h3>Fornecedores</h3>
+        <img src="{{ url_for('static', filename='img/adm_agencia.png') }}" alt="Agencias">
+        <h3>Agencias</h3>
         <p>Cadastro e controle de agências da empresa.</p>
         <a href="{{ url_for('cadastroagencia') }}">Acessar</a>
       </div>
 
       <div class="carro">
-        <img src="{{ url_for('static', filename='img/adm_veiculo.jpg') }}" alt="Agencias">
-        <h3>Fornecedores</h3>
+        <img src="{{ url_for('static', filename='img/adm_veiculo.png') }}" alt="Agencias">
+        <h3>Veículos</h3>
         <p>Cadastro e controle de veículos da empresa.</p>
         <a href="{{ url_for('cadastroveiculo') }}">Acessar</a>
       </div>
 
       <div class="carro">
-        <img src="{{ url_for('static', filename='img/adm_servico.jpg') }}" alt="Agencias">
-        <h3>Fornecedores</h3>
+        <img src="{{ url_for('static', filename='img/adm_servico.png') }}" alt="Agencias">
+        <h3>Serviços</h3>
         <p>Cadastro e controle de serviços realizado nos carros da empresa.</p>
         <a href="{{ url_for('cadastroservico') }}">Acessar</a>
       </div>

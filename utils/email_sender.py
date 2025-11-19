@@ -13,7 +13,7 @@ def enviar_email_confirmacao(api_key, destino, assunto, html):
     }
 
     payload = {
-        "sender": {"name": "NextDrive", "email": "nao-responder@nextdrive.com"},
+        "sender": {"name": "NextDrive", "email": "contatonextdrive@gmail.com"},
         "to": [{"email": destino}],
         "subject": assunto,
         "htmlContent": html

@@ -56,16 +56,16 @@
       this.setAttribute('aria-pressed', isHidden);
     });
 
-    // Validação simples de e-mail
-    //document.querySelector('form').addEventListener('submit', function (event) {
-     // const email = document.getElementById('email').value;
-     // const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-     // if (!regex.test(email)) {
-     //   alert('Por favor, insira um e-mail válido.');
-     //   alert('Exemplo: texto@texto.com');
-     //   event.preventDefault();
-     // }
-    //});
+    // Validação simples de e-mail com REGEX
+    document.querySelector('form').addEventListener('submit', function (event) {
+      const email = document.getElementById('email').value;
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!regex.test(email)) {
+        alert('Por favor, insira um e-mail válido.');
+        alert('Exemplo: texto@texto.com');
+        event.preventDefault();
+      }
+    });
   </script>
 </body>
 </html>
