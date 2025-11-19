@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cadastro de Fornecedor - NextDrive</title>
+  <title>Cadastro - NextDrive</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/cadastro.css') }}">
 </head>
 <body>
-
   <header>
     <img src="{{ url_for('static', filename='img/imglogo.png') }}" alt="Logo" class="logo">
     <h1>NextDrive</h1>
@@ -15,48 +14,45 @@
   </header>
 
   <main>
-
     <p>
-    {% with mensagens = get_flashed_messages(with_categories=true) %}
-      {% if mensagens %}
-        {% for categoria, msg in mensagens %}
-          <div class="flash {{ categoria }}">{{ msg }}</div>
-        {% endfor %}
-      {% endif %}
-    {% endwith %}
+      {% with mensagens = get_flashed_messages(with_categories=true) %}
+        {% if mensagens %}
+          {% for categoria, msg in mensagens %}
+            <div class="flash {{ categoria }}">{{ msg }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
     </p>
 
     <h2>Cadastro de Fornecedor</h2>
 
-    <form action="/cadastrofornecedor" method="POST" enctype="multipart/form-data">
+    <form action="{{ url_for('cadastrofornecedor') }}" method="POST" enctype="multipart/form-data">
 
-      <!-- DADOS DO FORNECEDOR -->
+      <!-- DADOS PESSOAIS -->
       <label for="cnpj">CNPJ</label>
-      <input type="text" id="cnpj" name="cnpj" maxlength="14" required>
+      <input type="text" id="cnpj" name="cnpj" maxlength="18" required>
 
       <label for="razaosocial">Razão Social</label>
-      <input type="text" id="razaosocial" name="razaosocial" maxlength="100" required>
+      <input type="text" id="razaosocial" name="razaosocial" maxlength="255" required>
 
       <label for="nome_fantasia">Nome Fantasia</label>
-      <input type="text" id="nome_fantasia" name="nome_fantasia" maxlength="100">
+      <input type="text" id="nome_fantasia" name="nome_fantasia" maxlength="255">
 
-      <label for="foto">Foto do Fornecedor</label>
+      <label for="foto">Foto</label>
       <input type="file" id="foto" name="foto" accept="image/*">
 
-      <h2>Endereço do Fornecedor</h2>
-
-      <!-- ENDEREÇO COMPLETO -->
+      <!-- ENDEREÇO -->
       <label for="logradouro">Logradouro</label>
       <input type="text" id="logradouro" name="logradouro" maxlength="255" required>
 
       <label for="numero">Número</label>
       <input type="number" id="numero" name="numero" required>
 
+      <label for="cep">CEP</label>
+      <input type="text" id="cep" name="cep" maxlength="9" required>
+
       <label for="bairro">Bairro</label>
       <input type="text" id="bairro" name="bairro" maxlength="255" required>
-
-      <label for="cep">CEP</label>
-      <input type="text" id="cep" name="cep" maxlength="8" required>
 
       <label for="complemento">Complemento</label>
       <input type="text" id="complemento" name="complemento" maxlength="100">
@@ -96,10 +92,39 @@
         <option value="TO">Tocantins</option>
       </select>
 
-      <button type="submit">Cadastrar Fornecedor</button>
+      <button type="submit">Cadastrar</button>
     </form>
-
   </main>
 
+  <script>
+    // Mascara CNPJ
+    const cnpjInput = document.getElementById("cnpj");
+
+    cnpjInput.addEventListener("input", function () {
+        let v = cnpjInput.value.replace(/\D/g, ""); // remove tudo que não é número
+        if (v.length > 14) v = v.slice(0, 14);      // garante no máximo 14 dígitos
+
+        if (v.length >= 13) {
+            v = v.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{0,2})/, "$1.$2.$3/$4-$5");
+        } else if (v.length >= 9) {
+            v = v.replace(/(\d{2})(\d{3})(\d{3})(\d{0,4})/, "$1.$2.$3/$4");
+        } else if (v.length >= 6) {
+            v = v.replace(/(\d{2})(\d{3})(\d{0,3})/, "$1.$2.$3");
+        } else if (v.length >= 3) {
+            v = v.replace(/(\d{2})(\d{0,3})/, "$1.$2");
+        }
+
+        cnpjInput.value = v;
+    });
+
+    // Mascara CEP
+    const cepInput = document.getElementById("cep");
+    cepInput.addEventListener("input", function () {
+      let v = cepInput.value.replace(/\D/g, "");
+      if (v.length > 8) v = v.slice(0, 8);
+      if (v.length > 5) v = v.replace(/(\d{5})(\d{0,3})/, "$1-$2");
+      cepInput.value = v;
+    });
+  </script>
 </body>
 </html>

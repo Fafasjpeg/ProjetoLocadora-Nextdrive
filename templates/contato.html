@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contato</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/contato.css') }}">
+</head>
+<body>
+  <header>
+    <img src="{{ url_for('static', filename='img/imglogo.png') }}" class="logo" alt="Logo">
+    <h1>Contato</h1>
+  </header>
+
+  <main>
+    <section class="conteudo">
+      <h2>Fale com a NextDrive</h2>
+
+      <p>Tem alguma dúvida, sugestão ou precisa de suporte? Preencha o formulário abaixo que retornaremos o contato o mais rápido possível.</p>
+
+      {% with mensagens = get_flashed_messages(with_categories=true) %}
+        {% if mensagens %}
+          {% for categoria, msg in mensagens %}
+            <div class="flash {{ categoria }}">{{ msg }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+      <br>
+
+      <form id="formContato" action="{{ url_for('contato') }}" method="POST" enctype="multipart/form-data">
+        <!-- nome -->
+        <label for="nome">Nome completo</label>
+        <input type="text" id="nome" name="nome" maxlength="255" required>
+
+        <!-- email -->
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" maxlength="255" required>
+
+        <!-- telefone (opcional) -->
+        <label for="telefone">Telefone (opcional)</label>
+        <input type="text" id="telefone" name="telefone" maxlength="11" placeholder="(XX) XXXXX-XXXX">
+
+        <!-- assunto -->
+        <label for="assunto">Assunto</label>
+        <input type="text" id="assunto" name="assunto" maxlength="255" required>
+
+        <!-- mensagem -->
+        <label for="mensagem">Mensagem</label>
+        <textarea id="mensagem" name="mensagem" rows="6" maxlength="2000" required></textarea>
+
+        <!-- anexo (opcional) -->
+        <label for="anexo">Anexo (opcional)</label>
+        <input type="file" id="anexo" name="anexo" accept=".jpg,.jpeg,.png,.pdf">
+
+        <div class="botoes">
+          <button type="submit" class="btn-enviar">Enviar</button>
+          <a href="/home" class="btn-voltar">Voltar</a>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 NextDrive</p>
+  </footer>
+
+  <script>
+  // Regex robusta para validar formato de e-mail
+  const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+  document.getElementById("formContato").addEventListener("submit", function (e) {
+    const emailInput = document.getElementById("email");
+    const email = emailInput.value.trim();
+
+    // Validação do e-mail
+    if (!emailRegex.test(email)) {
+      e.preventDefault();
+      alert("E-mail inválido! Utilize o formato: usuario@dominio.com");
+
+      // feedback visual
+      emailInput.style.border = "2px solid red";
+      return;
+    }
+
+    // Se estiver válido, remove borda vermelha
+    emailInput.style.border = "";
+  });
+</script>
+
+</body>
+</html>

@@ -22,10 +22,11 @@
       {% endif %}
     {% endwith %}
     </p>
-    <!-- IMAGEM DO VEÍCULO -->
-    <img src="{{ url_for('static', filename='img/cars/' ~ veiculo.imagem) }}" class="carro" alt="{{ veiculo.marca }} {{ veiculo.modelo }}">
 
-    <!-- DETALHES -->
+    <!-- imagem do veiculo -->
+    <img src="{{ url_for('foto_veiculo', id_veiculo=veiculo.id_veiculo) }}" class="carro" alt="{{ veiculo.marca }} {{ veiculo.modelo }}">
+
+    <!-- detaklhes -->
     <h2>{{ veiculo.marca }} {{ veiculo.modelo }}</h2>
     <p><strong>Preço diário:</strong> R$ {{ "%.2f"|format(veiculo.valor_diario) }}/dia</p>
     
@@ -33,7 +34,6 @@
       <p>{{ veiculo.descricao }}</p>
     {% endif %}
 
-    <!-- BOTÃO RESERVAR -->
     <a href="{{ url_for('reserva', id_veiculo=veiculo.id_veiculo) }}" class="btn-reservar">Reservar</a>
   </main>
 </body>

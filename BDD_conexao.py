@@ -159,6 +159,7 @@ class Veiculo(Base):
     cor = Column(String(100), nullable=False)
     quilometragem = Column(Integer, nullable=False) 
     categoria = Column(String(255), nullable=False)
+    foto = Column(LargeBinary, nullable=True)
 
 
     alugueis = relationship("Aluguel", back_populates="veiculo")

@@ -17,7 +17,7 @@
 
       <!-- FOTO DE PERFIL -->
       <div class="foto-perfil">
-        <img src="{{ url_for('static', filename='img/default-user.jpg') }}" alt="Foto de perfil">
+        <img src="/foto_cliente/{{ cliente.id_cliente }}" alt="Foto de perfil">
       </div>
 
       <h2>Meu Perfil</h2>
@@ -26,8 +26,9 @@
       <div class="info">
         <p><strong>Nome:</strong> {{ cliente.nome }}</p>
         <p><strong>Email:</strong> {{ cliente.email }}</p>
-        <p><strong>Data de Nascimento:</strong> {{ cliente.data_de_nasci }}</p>
-        <p><strong>CPF:</strong> {{ cliente.cpf }}</p>
+        <p><strong>Data de Nascimento:</strong> {{ cliente.data_formatada }}</p>
+        <p><strong>CPF:</strong> {{ cliente.cpf_formatado }}</p>
+
       </div>
       <a href="/redefinirsenha"> Redefina sua senha </a><br>
       <a href="/loginadm"> Entre como Administrador </a><br>

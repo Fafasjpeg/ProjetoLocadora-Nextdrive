@@ -401,6 +401,15 @@ class Operacao:
                 return []  # retorna lista vazia se não houver registros
 
             return cargos
+
+    def formatar_cpf(self, cpf):
+        cpf = ''.join(filter(str.isdigit, cpf))
+        return f"{cpf[0:3]}.{cpf[3:6]}.{cpf[6:9]}-{cpf[9:11]}"
+
+    def formatar_data(self, data):
+        return data.strftime("%d/%m/%Y")
+
+
        
 #fotos_b = b'foto'    
 #data_nascimento = '01/05/2008'

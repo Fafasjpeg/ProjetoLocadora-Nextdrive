@@ -8,7 +8,6 @@
 </head>
 
 <body>
-  <!-- ====== CABEÇALHO ====== -->
   <header>
     <img src="{{ url_for('static', filename='img/imglogo.png') }}" alt="Logo" class="logo">
     <h1>Cadastro de Agência</h1>
@@ -18,7 +17,6 @@
   <main>
     <h2>Nova Agência</h2>
 
-    <!-- MENSAGENS -->
     {% with mensagens = get_flashed_messages(with_categories=true) %}
       {% if mensagens %}
         {% for categoria, msg in mensagens %}
@@ -52,7 +50,7 @@
       <input type="text" id="bairro" name="bairro" required>
 
       <label for="cep">CEP:</label>
-      <input type="text" id="cep" name="cep" maxlength="8" required>
+      <input type="text" id="cep" name="cep" maxlength="9" required>
 
       <label for="complemento">Complemento:</label>
       <input type="text" id="complemento" name="complemento">
@@ -61,7 +59,36 @@
       <input type="text" id="cidade" name="cidade" required>
 
       <label for="estado">Estado:</label>
-      <input type="text" id="estado" name="estado" required>
+      <select id="estado" name="estado" required>
+        <option value="">Selecione</option>
+        <option value="AC">Acre</option>
+        <option value="AL">Alagoas</option>
+        <option value="AP">Amapá</option>
+        <option value="AM">Amazonas</option>
+        <option value="BA">Bahia</option>
+        <option value="CE">Ceará</option>
+        <option value="DF">Distrito Federal</option>
+        <option value="ES">Espírito Santo</option>
+        <option value="GO">Goiás</option>
+        <option value="MA">Maranhão</option>
+        <option value="MT">Mato Grosso</option>
+        <option value="MS">Mato Grosso do Sul</option>
+        <option value="MG">Minas Gerais</option>
+        <option value="PA">Pará</option>
+        <option value="PB">Paraíba</option>
+        <option value="PR">Paraná</option>
+        <option value="PE">Pernambuco</option>
+        <option value="PI">Piauí</option>
+        <option value="RJ">Rio de Janeiro</option>
+        <option value="RN">Rio Grande do Norte</option>
+        <option value="RS">Rio Grande do Sul</option>
+        <option value="RO">Rondônia</option>
+        <option value="RR">Roraima</option>
+        <option value="SC">Santa Catarina</option>
+        <option value="SP">São Paulo</option>
+        <option value="SE">Sergipe</option>
+        <option value="TO">Tocantins</option>
+      </select>
 
       <button type="submit">Cadastrar Agência</button>
     </form>
@@ -70,6 +97,39 @@
   <footer>
     <p>&copy; 2025 NextDrive - Administração</p>
   </footer>
+
+  <!-- SCRIPT PARA MASCARA DE TELEFONE E CEP -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+      /* mascara telefone */
+      const telInput = document.getElementById("telefone");
+      telInput.addEventListener("input", function () {
+        let v = telInput.value.replace(/\D/g, "");
+        if (v.length > 11) v = v.slice(0, 11);
+        if (v.length > 6) {
+          v = v.replace(/(\d{2})(\d{5})(\d{0,4})/, "($1) $2-$3");
+        } else if (v.length > 2) {
+          v = v.replace(/(\d{2})(\d{0,5})/, "($1) $2");
+        } else if (v.length > 0) {
+          v = v.replace(/(\d{0,2})/, "($1");
+        }
+        telInput.value = v;
+      });
+
+      /* mascara cep */
+      const cepInput = document.getElementById("cep");
+      cepInput.addEventListener("input", function () {
+        let v = cepInput.value.replace(/\D/g, "");
+        if (v.length > 8) v = v.slice(0, 8);
+        if (v.length > 5) {
+          v = v.replace(/(\d{5})(\d{0,3})/, "$1-$2");
+        }
+        cepInput.value = v;
+      });
+
+    });
+  </script>
 
 </body>
 </html>

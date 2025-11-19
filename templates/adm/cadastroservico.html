@@ -8,18 +8,15 @@
 </head>
 
 <body>
-  <!-- ====== CABEÇALHO ====== -->
   <header>
     <img src="{{ url_for('static', filename='img/imglogo.png') }}" alt="Logo" class="logo">
     <h1>Cadastro de Serviço</h1>
-
     <a href="/homeadm">Home</a>
   </header>
 
   <main>
     <h2>Novo Serviço</h2>
 
-    <!-- MENSAGENS -->
     {% with mensagens = get_flashed_messages(with_categories=true) %}
       {% if mensagens %}
         {% for categoria, msg in mensagens %}
@@ -39,13 +36,13 @@
       <input type="text" id="nome" name="nome" required>
 
       <label for="preco">Preço (R$):</label>
-      <input type="number" id="preco" name="preco" step="0.01" min="0" required>
+      <input type="text" id="preco" name="preco" required>
 
       <label for="id_fornecedor">Fornecedor:</label>
       <select id="id_fornecedor" name="id_fornecedor" required>
         <option value="">Selecione...</option>
         {% for f in fornecedores %}
-          <option value="{{ f.id_fornecedor }}">{{ f.razaosocial }} ({{ f.cnpj }})</option>
+          <option value="{{ f.id_fornecedor }}">{{ f.razao_social }} ({{ f.cnpj }})</option>
         {% endfor %}
       </select>
 
@@ -56,6 +53,19 @@
   <footer>
     <p>&copy; 2025 NextDrive - Administração</p>
   </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const precoInput = document.getElementById("preco");
+
+      precoInput.addEventListener("input", function () {
+        let v = precoInput.value.replace(/\D/g, "");
+        v = (v/100).toFixed(2) + "";
+        v = v.replace(".", ",");
+        precoInput.value = v;
+      });
+    });
+  </script>
 
 </body>
 </html>

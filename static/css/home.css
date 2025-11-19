@@ -141,6 +141,14 @@ main {
   margin-bottom: 10px;
 }
 
+.lista{
+  text-decoration: none;
+  background-color: white;
+  padding: 9px;
+  border-radius: 6px;
+  color: #2563EB;
+}
+
 .carro a {
   display: inline-block;
   background: #22C55E;

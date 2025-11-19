@@ -9,8 +9,11 @@
 <body>
   <header>
     <img src="{{ url_for('static', filename='img/imglogo.png') }}" class="logo" alt="Logo">
-    <h1>Lista de Veículos</h1>
+    <h1>Lista de Veículos</h1><a href="/home" class="voltar">Voltar para Home</a>
   </header>
+    <div>
+      
+    </div>
   <p>
     {% with mensagens = get_flashed_messages(with_categories=true) %}
       {% if mensagens %}
@@ -23,26 +26,22 @@
 
   <main>
     <div class="grid">
-      <div class="carro">
-        <img src="{{ url_for('static', filename='img/cars/car1.jpg') }}" alt="Hatch compacto">
-        <h3>Hatch Compacto</h3>
-        <p>R$ 99/dia</p>
-        <a href="/reserva" class="btn">Reservar</a>
-      </div>
 
       {% for v in veiculos %}
       <div class="carro">
-          <img src="{{ url_for('static', filename='img/cars/' ~ v.imagem) }}" alt="{{ v.modelo }}">
+          <!-- IMAGEM DO VEÍCULO VINDO DO BANCO -->
+          <img src="{{ url_for('foto_veiculo', id_veiculo=v.id_veiculo) }}" alt="{{ v.marca }} {{ v.modelo }}">
 
           <h3>{{ v.marca }} {{ v.modelo }}</h3>
 
           <p>R$ {{ "%.2f"|format(v.valor_diario) }}/dia</p>
 
-          <a href="{{ url_for('reserva', veiculo_id=v.id) }}" class="btn-reservar">
+          <a href="{{ url_for('reserva', id_veiculo=v.id_veiculo) }}" class="btn-reservar">
             Reservar
           </a>
       </div>
       {% endfor %}
+
     </div>
   </main>
 </body>

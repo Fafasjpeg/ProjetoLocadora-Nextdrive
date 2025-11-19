@@ -50,11 +50,11 @@
     </div>
 
     <section class="veiculos">
-      
-
       {% for v in veiculos %}
       <div class="carro">
-          <!--img src="{{ url_for('static', filename='img/cars/carromisterio.webp') }}" alt="{{ v.modelo }}"-->
+          <!-- IMAGEM DO VEÍCULO -->
+          <img src="{{ url_for('foto_veiculo', id_veiculo=v.id_veiculo) }}" 
+              alt="{{ v.marca }} {{ v.modelo }}">
 
           <h3>{{ v.marca }} {{ v.modelo }}</h3>
 
@@ -65,12 +65,13 @@
           </a>
       </div>
       {% endfor %}
-
     </section>
+
   </main>
 
   <footer>
-    <p><a href="/termos">Termos</a> & <a href="/privacidade">Privacidade</a></p>
+    <p><a href="/listadeveiculos" class="lista">Ir para lista de Veículos</a></p><br>
+    <p><a href="/termos">Termos</a> & <a href="/privacidade">Privacidade</a> & <a href="/contato">Contato</a></p>
     <p>&copy; 2025 NextDrive</p>
   </footer>
 </body>

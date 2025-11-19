@@ -42,7 +42,7 @@ main {
   padding: 40px 20px;
 }
 
-.conteudo {
+.form-container {
   background-color: white;
   border-radius: 10px;
   padding: 30px;
@@ -50,26 +50,72 @@ main {
   max-width: 800px;
   width: 100%;
 }
-.contato{
+
+.form-container h2 {
   color: #2563eb;
-  text-decoration: none;
-  font-weight: bold ;
-}
-.conteudo h2 {
-  color: #2563eb;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
-.conteudo p {
-  line-height: 1.6;
+/* ===== FORMULÁRIO ===== */
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  font-weight: bold;
   color: #444;
-  margin-bottom: 15px;
+}
+
+input,
+textarea,
+select {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  width: 100%;
+  background-color: #f9fafb;
+  transition: border-color 0.3s;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #2563eb;
+  outline: none;
+}
+
+textarea {
+  height: 120px;
+  resize: none;
+}
+
+/* ===== BOTÃO ENVIAR ===== */
+
+.btn-enviar {
+  padding: 12px;
+  background-color: #2563eb;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-enviar:hover {
+  background-color: #1e40af;
 }
 
 /* ===== BOTÃO VOLTAR ===== */
+
 .btn-voltar {
   display: inline-block;
-  background-color: #2563eb;
+  margin-top: 10px;
+  background-color: #6b7280;
   color: white;
   padding: 10px 16px;
   border-radius: 8px;
@@ -79,7 +125,7 @@ main {
 }
 
 .btn-voltar:hover {
-  background-color: #1e40af;
+  background-color: #4b5563;
 }
 
 /* ===== RODAPÉ ===== */

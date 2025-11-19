@@ -37,8 +37,6 @@
 <a href="homeadm">Home - Administração</a>
 <a href="home">Home</a>
 
-<!-- ===================== TABELA DE VEÍCULOS ===================== -->
-
 <h2>Veículos</h2>
 <table>
     <tr>
@@ -55,14 +53,15 @@
         <td>{{ v.modelo }}</td>
         <td>{{ v.placa }}</td>
         <td>
-            <button class="action-btn edit">Editar</button>
-            <button class="action-btn delete">Excluir</button>
+            <a href="{{ url_for('deletar_veiculo', id_veiculo=v.id_veiculo) }}" 
+            class="action-btn delete" 
+            onclick="return confirm('Deseja realmente excluir este veículo?');">
+                Excluir
+            </a>
         </td>
     </tr>
     {% endfor %}
 </table>
-
-<!-- ===================== FORNECEDORES ===================== -->
 
 <h2>Fornecedores</h2>
 <table>
@@ -78,14 +77,17 @@
         <td>{{ f.razao_social }}</td>
         <td>{{ f.cnpj }}</td>
         <td>
-            <button class="action-btn edit">Editar</button>
-            <button class="action-btn delete">Excluir</button>
+            
+            <a href="{{ url_for('deletar_fornecedor', id_fornecedor=f.id_fornecedor) }}" 
+                class="action-btn delete" 
+                onclick="return confirm('Deseja realmente excluir este fornecedor?');">
+                Excluir
+            </a>
+
         </td>
     </tr>
     {% endfor %}
 </table>
-
-<!-- ===================== SERVIÇOS ===================== -->
 
 <h2>Serviços</h2>
 <table>
@@ -101,14 +103,15 @@
         <td>{{ s.nome }}</td>
         <td>{{ s.fornecedor.razaosocial }}</td>
         <td>
-            <button class="action-btn edit">Editar</button>
-            <button class="action-btn delete">Excluir</button>
+            <a href="{{ url_for('deletar_servico', id_servico=s.id_servico) }}" 
+            class="action-btn delete" 
+            onclick="return confirm('Deseja realmente excluir este serviço?');">
+            Excluir
+            </a>
         </td>
     </tr>
     {% endfor %}
 </table>
-
-<!-- ===================== EMPREGADOS ===================== -->
 
 <h2>Empregados</h2>
 <table>
@@ -124,14 +127,15 @@
         <td>{{ e.nome }}</td>
         <td>{{ e.cargo.nome }}</td>
         <td>
-            <button class="action-btn edit">Editar</button>
-            <button class="action-btn delete">Excluir</button>
+            <a href="{{ url_for('deletar_empregado', id_empregado=e.id_empregado) }}"
+               class="action-btn delete"
+               onclick="return confirm('Deseja realmente excluir este empregado?');">
+               Excluir
+            </a>
         </td>
     </tr>
     {% endfor %}
 </table>
-
-<!-- ===================== AGÊNCIAS ===================== -->
 
 <h2>Agências</h2>
 <table>
@@ -151,8 +155,11 @@
         <td>{{ a.telefone }}</td>
         <td>{{ a.endereco.cidade }}</td>
         <td>
-            <button class="action-btn edit">Editar</button>
-            <button class="action-btn delete">Excluir</button>
+            <a href="{{ url_for('deletar_agencia', id_agencia=a.id_agencia) }}"
+               class="action-btn delete"
+               onclick="return confirm('Deseja realmente excluir esta agência?');">
+               Excluir
+            </a>
         </td>
     </tr>
     {% endfor %}
