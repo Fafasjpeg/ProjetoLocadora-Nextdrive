@@ -1,4 +1,4 @@
-/* ===== GERAL ===== */
+/* geral */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -9,7 +9,7 @@ body {
   min-height: 100vh;
 }
 
-/* ===== CABEÇALHO ===== */
+/* header */
 header {
   background-color: #1e1e2f;
   color: white;
@@ -27,14 +27,23 @@ header {
   left: 30px;
 }
 
-/* Centraliza o título */
+/* titulo central */
 header h1 {
   margin: 0;
   font-size: 1.6rem;
   text-align: center;
 }
 
-/* ===== CONTEÚDO ===== */
+header a {
+  display: flex;
+  align-items: center;
+}
+
+header a .logo {
+  display: block;
+}
+
+/* conteudo */
 main {
   flex: 1;
   display: flex;
@@ -56,7 +65,7 @@ main {
   margin-bottom: 20px;
 }
 
-/* ===== FORMULÁRIO ===== */
+/* formulario */
 
 form {
   display: flex;
@@ -93,7 +102,7 @@ textarea {
   resize: none;
 }
 
-/* ===== BOTÃO ENVIAR ===== */
+/* botoes */
 
 .btn-enviar {
   padding: 12px;
@@ -109,8 +118,6 @@ textarea {
 .btn-enviar:hover {
   background-color: #1e40af;
 }
-
-/* ===== BOTÃO VOLTAR ===== */
 
 .btn-voltar {
   display: inline-block;
@@ -128,11 +135,58 @@ textarea {
   background-color: #4b5563;
 }
 
-/* ===== RODAPÉ ===== */
+/* footer */
 footer {
   background-color: #1e1e2f;
   color: white;
   text-align: center;
   padding: 10px;
   margin-top: auto;
+}
+
+/* mensagens padrao flash */
+.flash {
+  padding: 12px 15px;
+  margin: 10px auto;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 14px;
+  animation: fadeIn 0.4s ease;
+  text-align: center;
+}
+
+/* sucess */
+.flash.success {
+  background: #d1fae5;
+  color: #065f46;
+  border-left: 4px solid #059669;
+}
+
+/* erro */
+.flash.error {
+  background: #fee2e2;
+  color: #991b1b;
+  border-left: 4px solid #dc2626;
+}
+
+/* aviso */
+.flash.warning {
+  background: #fef3c7;
+  color: #92400e;
+  border-left: 4px solid #f59e0b;
+}
+
+/* info */
+.flash.info {
+  background: #dbeafe;
+  color: #1e40af;
+  border-left: 4px solid #2563eb;
+}
+
+/* animacao */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
 }

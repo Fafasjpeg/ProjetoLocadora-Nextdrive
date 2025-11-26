@@ -22,6 +22,7 @@
     {% endwith %}
     </p>
 
+    <!-- cards -->
 <div class="card-container">
     <div class="card">
         <h2>Total de Aluguéis</h2>
@@ -37,6 +38,7 @@
 <a href="homeadm">Home - Administração</a>
 <a href="home">Home</a>
 
+<!-- tabela veiculo -->
 <h2>Veículos</h2>
 <table>
     <tr>
@@ -63,6 +65,7 @@
     {% endfor %}
 </table>
 
+<!-- tabela fornecedor -->
 <h2>Fornecedores</h2>
 <table>
     <tr>
@@ -89,6 +92,7 @@
     {% endfor %}
 </table>
 
+<!-- tabela servico -->
 <h2>Serviços</h2>
 <table>
     <tr>
@@ -101,7 +105,7 @@
     <tr>
         <td>{{ s.id_servico }}</td>
         <td>{{ s.nome }}</td>
-        <td>{{ s.fornecedor.razaosocial }}</td>
+        <td>{{ s.fornecedor.razao_social }}</td>
         <td>
             <a href="{{ url_for('deletar_servico', id_servico=s.id_servico) }}" 
             class="action-btn delete" 
@@ -113,6 +117,7 @@
     {% endfor %}
 </table>
 
+<!-- tabela empregado -->
 <h2>Empregados</h2>
 <table>
     <tr>
@@ -137,6 +142,7 @@
     {% endfor %}
 </table>
 
+<!-- tabela agencia -->
 <h2>Agências</h2>
 <table>
     <tr>

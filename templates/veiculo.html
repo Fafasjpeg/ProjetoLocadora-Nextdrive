@@ -3,17 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Detalhes do Veículo - {{ veiculo.marca }} {{ veiculo.modelo }}</title>
+  <title>{{ veiculo.marca }} {{ veiculo.modelo }} | Detalhes</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/veiculo.css') }}">
 </head>
 <body>
+
+
   <header>
-    <img src="{{ url_for('static', filename='img/imglogo.png') }}" class="logo" alt="Logo">
-    <h1>{{ veiculo.marca }} {{ veiculo.modelo }}</h1>
+    <a href="{{ url_for('home') }}">
+      <img src="{{ url_for('static', filename='img/imglogo.png') }}" alt="Logo" class="logo">
+    </a>
+    <h1>NextDrive</h1>
   </header>
 
-  <main>
-    <p>
+  <main class="container">
+
     {% with mensagens = get_flashed_messages(with_categories=true) %}
       {% if mensagens %}
         {% for categoria, msg in mensagens %}
@@ -21,20 +25,68 @@
         {% endfor %}
       {% endif %}
     {% endwith %}
-    </p>
 
-    <!-- imagem do veiculo -->
-    <img src="{{ url_for('foto_veiculo', id_veiculo=veiculo.id_veiculo) }}" class="carro" alt="{{ veiculo.marca }} {{ veiculo.modelo }}">
+    <h2 class="titulo-veiculo">{{ veiculo.marca }} {{ veiculo.modelo }}</h2>
 
-    <!-- detaklhes -->
-    <h2>{{ veiculo.marca }} {{ veiculo.modelo }}</h2>
-    <p><strong>Preço diário:</strong> R$ {{ "%.2f"|format(veiculo.valor_diario) }}/dia</p>
-    
-    {% if veiculo.descricao %}
-      <p>{{ veiculo.descricao }}</p>
-    {% endif %}
+    <div class="foto-box">
+      <img src="{{ url_for('foto_veiculo', id_veiculo=veiculo.id_veiculo) }}" 
+           alt="{{ veiculo.marca }} {{ veiculo.modelo }}"
+           class="foto-veiculo">
+    </div>
+    <br><br>
 
-    <a href="{{ url_for('reserva', id_veiculo=veiculo.id_veiculo) }}" class="btn-reservar">Reservar</a>
+    <section class="info">
+
+      <div class="info-item">
+        <span class="label">Preço diário:</span>
+        <span class="valor">R$ {{ "%.2f"|format(veiculo.valor_diario) }}</span>
+      </div>
+
+      <div class="info-item">
+        <span class="label">Placa:</span>
+        <span class="valor">{{ veiculo.placa }}</span>
+      </div>
+
+      <div class="info-item">
+        <span class="label">Cor:</span>
+        <span class="valor">{{ veiculo.cor }}</span>
+      </div>
+
+      <div class="info-item">
+        <span class="label">Quilometragem:</span>
+        <span class="valor">{{ veiculo.quilometragem }} km</span>
+      </div>
+
+      <div class="info-item">
+        <span class="label">Categoria:</span>
+        <span class="valor">{{ veiculo.categoria }}</span>
+      </div>
+
+      {% if veiculo.data_aquisicao %}
+      <div class="info-item">
+        <span class="label">Data de Aquisição:</span>
+        <span class="valor">{{ veiculo.data_aquisicao.strftime("%d/%m/%Y") }}</span>
+      </div>
+      {% endif %}
+
+      {% if veiculo.descricao %}
+      <div class="descricao">
+        <h3>Descrição</h3>
+        <p>{{ veiculo.descricao }}</p>
+      </div>
+      {% endif %}
+
+      <a href="{{ url_for('reserva', id_veiculo=veiculo.id_veiculo) }}" class="btn-reservar">
+        Reservar
+      </a>
+
+    </section>
+
   </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 NextDrive</p>
+  </footer>
+
 </body>
 </html>

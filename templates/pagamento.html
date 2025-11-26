@@ -11,6 +11,7 @@
     <img src="{{ url_for('static', filename='img/imglogo.png') }}" class="logo" alt="Logo">
     <h1>NextDrive</h1>
   </header>
+  <!-- trocar essa pagina por uma api de pagamento futuramente -->
 
   <form id="paymentForm" action="/pagamento" method="POST">
 
@@ -27,12 +28,12 @@
   </p>
 
   <div class="opcoes-pagamento">
-    <button type="button" class="opcao" data-metodo="credito">💳 Crédito</button>
-    <button type="button" class="opcao" data-metodo="debito">🏧 Débito</button>
-    <button type="button" class="opcao" data-metodo="pix">⚡ Pix</button>
+    <button type="button" class="opcao" data-metodo="credito">Cartão de Crédito</button>
+    <button type="button" class="opcao" data-metodo="debito">Cartão de Débito</button>
+    <button type="button" class="opcao" data-metodo="pix">Pix</button>
   </div>
 
-  <!-- cartão -->
+  <!-- cartao -->
   <div id="formCartao" class="oculto">
     <h3 id="tituloCartao">Pagamento com Cartão</h3>
 
@@ -54,11 +55,11 @@
     </div>
   </div>
 
-  <!-- PIX -->
+  <!-- pix -->
   <div id="pixContainer" class="oculto">
     <h3>Pagamento via Pix</h3>
     <input type="text" readonly value="11972751430" id="codigoPix" name="pix_chave">
-    <!-- depois fazer botão para confirmar ou ate gerar QR e enviar ao backend -->
+    <p>Use a chave acima para realizar o pagamento via Pix.</p>
   </div>
 
   <button type="submit">Confirmar pagamento</button>
@@ -97,8 +98,7 @@
       }
     });
   });
-
-  // opcional: validar antes de enviar
+  // validação simples antes de enviar
   document.getElementById('paymentForm').addEventListener('submit', e => {
     const metodo = paymentMethodInput.value;
     if (!metodo) {
@@ -106,9 +106,8 @@
       alert('Selecione um método de pagamento antes de continuar.');
       return;
     }
-    // aqui você pode rodar validações específicas por método
-    // ex: se metodo==='credito' validar número do cartão, cvv, parcelas, etc.
   });
 </script>
+
 </body>
 </html>

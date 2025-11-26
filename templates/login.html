@@ -9,7 +9,7 @@
 <body>
   <header>
     <img src="{{ url_for('static', filename='img/imglogo.png') }}" alt="Logo da Locadora" class="logo">
-    <h1>Locadora de Veículos NextDrive</h1>
+    <h1>NextDrive</h1>
   </header>
 
   <main>
@@ -48,7 +48,7 @@
   </footer>
 
   <script>
-    // Mostrar/ocultar senha
+    // mostrar/esconder senha
     document.querySelector('.toggle-password').addEventListener('click', function () {
       const senhaInput = document.getElementById('senha');
       const isHidden = senhaInput.type === 'password';
@@ -56,7 +56,7 @@
       this.setAttribute('aria-pressed', isHidden);
     });
 
-    // Validação simples de e-mail com REGEX
+    // validacao de email com regex
     document.querySelector('form').addEventListener('submit', function (event) {
       const email = document.getElementById('email').value;
       const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

@@ -1,5 +1,6 @@
 import requests
 
+#metodo para enviar email de confirmacao
 def enviar_email_confirmacao(api_key, destino, assunto, html):
     """
     Envia um e-mail usando a API do Brevo (Sendinblue).
@@ -22,6 +23,7 @@ def enviar_email_confirmacao(api_key, destino, assunto, html):
     r = requests.post(url, headers=headers, json=payload)
     return r.status_code, r.text
 
+#metodo para montar o email de contato com o cliente
 def montar_email_contato(nome, email, telefone, assunto, mensagem):
     return f"""
     <h2>Novo contato recebido pelo site NextDrive</h2>

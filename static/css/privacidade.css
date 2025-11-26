@@ -1,4 +1,4 @@
-/* ===== GERAL ===== */
+/* geral */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -9,7 +9,7 @@ body {
   min-height: 100vh;
 }
 
-/* ===== CABEÇALHO ===== */
+/* cabecalho */
 header {
   background-color: #1e1e2f;
   color: white;
@@ -27,14 +27,23 @@ header {
   left: 30px;
 }
 
-/* Centraliza o título */
+/* central titulo */
 header h1 {
   margin: 0;
   font-size: 1.6rem;
   text-align: center;
 }
 
-/* ===== CONTEÚDO ===== */
+header a {
+  display: flex;
+  align-items: center;
+}
+
+header a .logo {
+  display: block;
+}
+
+/* conteudo */
 main {
   flex: 1;
   display: flex;
@@ -66,7 +75,7 @@ main {
   margin-bottom: 15px;
 }
 
-/* ===== BOTÃO VOLTAR ===== */
+/* botao */
 .btn-voltar {
   display: inline-block;
   background-color: #2563eb;
@@ -82,7 +91,7 @@ main {
   background-color: #1e40af;
 }
 
-/* ===== RODAPÉ ===== */
+/* footer */
 footer {
   background-color: #1e1e2f;
   color: white;

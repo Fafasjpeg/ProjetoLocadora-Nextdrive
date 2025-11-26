@@ -1,4 +1,4 @@
-/* ======== ESTILO GERAL ======== */
+/* geral */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -9,7 +9,7 @@ body {
   min-height: 100vh;
 }
 
-/* ======== CABEÇALHO ======== */
+/* cabecalho */
 header {
   background: #1e1e2f;
   color: white;
@@ -49,14 +49,14 @@ nav a:hover {
   background: rgba(255, 255, 255, 0.2);
 }
 
-/* ======== CONTEÚDO PRINCIPAL ======== */
+/* conteudo princ. */
 main {
   flex: 1;
   padding: 20px;
   text-align: center;
 }
 
-/* ======== INTRO ======== */
+/* intro */
 .intro h2 {
   color: #2563EB;
   font-size: 1.8em;
@@ -68,7 +68,7 @@ main {
   margin-bottom: 25px;
 }
 
-/* ======== FILTROS ======== */
+/* filtro */
 .filtros {
   display: flex;
   justify-content: center;
@@ -100,7 +100,7 @@ main {
   background: #16A34A;
 }
 
-/* ======== LISTA DE VEÍCULOS ======== */
+/* lista de veiculos */
 .veiculos {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -163,7 +163,7 @@ main {
   background: #16A34A;
 }
 
-/* ======== RODAPÉ ======== */
+/* footer */
 footer {
   background: #2563EB;
   color: white;
@@ -173,4 +173,51 @@ footer {
 }
 a {
   color: white
+}
+
+/* mensagens padrao flash */
+.flash {
+  padding: 12px 15px;
+  margin: 10px auto;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 14px;
+  animation: fadeIn 0.4s ease;
+  text-align: center;
+}
+
+/* sucess */
+.flash.success {
+  background: #d1fae5;
+  color: #065f46;
+  border-left: 4px solid #059669;
+}
+
+/* erro */
+.flash.error {
+  background: #fee2e2;
+  color: #991b1b;
+  border-left: 4px solid #dc2626;
+}
+
+/* aviso */
+.flash.warning {
+  background: #fef3c7;
+  color: #92400e;
+  border-left: 4px solid #f59e0b;
+}
+
+/* info */
+.flash.info {
+  background: #dbeafe;
+  color: #1e40af;
+  border-left: 4px solid #2563eb;
+}
+
+/* animacao */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
 }

@@ -8,9 +8,10 @@
 </head>
 <body>
   <header>
-    <img src="{{ url_for('static', filename='img/imglogo.png') }}" alt="Logo" class="logo">
+    <a href="{{ url_for('homeadm') }}">
+      <img src="{{ url_for('static', filename='img/imglogo.png') }}" alt="Logo" class="logo">
+    </a>
     <h1>NextDrive</h1>
-    <a href="/homeadm">Home</a>
   </header>
 
   <main>
@@ -28,7 +29,6 @@
 
     <form action="{{ url_for('cadastrofornecedor') }}" method="POST" enctype="multipart/form-data">
 
-      <!-- DADOS PESSOAIS -->
       <label for="cnpj">CNPJ</label>
       <input type="text" id="cnpj" name="cnpj" maxlength="18" required>
 
@@ -41,7 +41,6 @@
       <label for="foto">Foto</label>
       <input type="file" id="foto" name="foto" accept="image/*">
 
-      <!-- ENDEREÇO -->
       <label for="logradouro">Logradouro</label>
       <input type="text" id="logradouro" name="logradouro" maxlength="255" required>
 
@@ -97,12 +96,12 @@
   </main>
 
   <script>
-    // Mascara CNPJ
+    // mascara CNPJ
     const cnpjInput = document.getElementById("cnpj");
 
     cnpjInput.addEventListener("input", function () {
-        let v = cnpjInput.value.replace(/\D/g, ""); // remove tudo que não é número
-        if (v.length > 14) v = v.slice(0, 14);      // garante no máximo 14 dígitos
+        let v = cnpjInput.value.replace(/\D/g, ""); // remove remove tudo q n é numero
+        if (v.length > 14) v = v.slice(0, 14);      // garante no max 14 dígitos
 
         if (v.length >= 13) {
             v = v.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{0,2})/, "$1.$2.$3/$4-$5");
@@ -117,7 +116,7 @@
         cnpjInput.value = v;
     });
 
-    // Mascara CEP
+    // mascara cep
     const cepInput = document.getElementById("cep");
     cepInput.addEventListener("input", function () {
       let v = cepInput.value.replace(/\D/g, "");

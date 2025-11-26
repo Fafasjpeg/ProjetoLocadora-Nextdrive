@@ -37,27 +37,27 @@
 
         <hr>
 
-        <!-- INFORMAÇÕES DO VEÍCULO -->
+        <!-- info veiculo -->
         <h3>📌 Dados do Veículo</h3>
         <p><strong>Modelo:</strong> {{ veiculo.modelo }}</p>
         <p><strong>Marca:</strong> {{ veiculo.marca }}</p>
         <p><strong>Categoria:</strong> {{ veiculo.categoria }}</p>
         <p><strong>Placa:</strong> {{ veiculo.placa }}</p>
-
+ 
         <hr>
 
-        <!-- INFORMAÇÕES DO ALUGUEL -->
+        <!-- info aluguel -->
         <h3>📅 Detalhes da Reserva</h3>
-        <p><strong>Retirada:</strong> {{ aluguel.data_retirada }} — 
-            Agência: {{ aluguel.agencia_retirada.nome }} — {{ aluguel.agencia_retirada.endereco.logradouro }}, {{ aluguel.agencia_retirada.endereco.numero }}</p>
+        <p><strong>Retirada:</strong> {{ aluguel.data_retirada.strftime("%d/%m/%Y") }} <br>
+            Agência: {{ aluguel.agencia_retirada.nome }} <br> {{ aluguel.agencia_retirada.endereco.logradouro }}, {{ aluguel.agencia_retirada.endereco.numero }}</p>
 
-        <p><strong>Devolução:</strong> {{ aluguel.data_devolutiva }} —
-            Agência: {{ aluguel.agencia_devolucao.nome }} — {{ aluguel.agencia_devolucao.endereco.logradouro }}, {{ aluguel.agencia_devolucao.endereco.numero }}</p>
+        <p><strong>Devolução:</strong> {{ aluguel.data_devolucao.strftime("%d/%m/%Y") }} <br>
+            Agência: {{ aluguel.agencia_devolucao.nome }} <br> {{ aluguel.agencia_devolucao.endereco.logradouro }}, {{ aluguel.agencia_devolucao.endereco.numero }}</p>
 
         <p><strong>Dias alugados:</strong> {{ aluguel.quantidade_dias }}</p>
 
         <hr>
-
+        <!-- info pgmto -->
         <h3>💳 Pagamento</h3>
 
         <p><strong>Método:</strong>
@@ -84,7 +84,7 @@
         </p>
 
         <div class="confirmation-buttons">
-            <a href="/perfil" class="btn btn-primary">Minhas Reservas</a>
+            <a href="/limpa_sessoes_perfil" class="btn btn-primary">Minhas Reservas</a>
             <a href="/limpa_sessoes" class="btn btn-secondary">Voltar ao Início</a>
         </div>
 

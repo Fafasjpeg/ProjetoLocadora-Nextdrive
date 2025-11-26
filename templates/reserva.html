@@ -8,7 +8,9 @@
 </head>
 <body>
   <header>
-    <img src="{{ url_for('static', filename='img/imglogo.png') }}" alt="Logo" class="logo">
+    <a href="{{ url_for('home') }}">
+      <img src="{{ url_for('static', filename='img/imglogo.png') }}" alt="Logo" class="logo">
+    </a>
     <h1>NextDrive</h1>
   </header>
 
@@ -16,11 +18,11 @@
     <h2>Reserva do Veículo</h2>
 
     <section class="carro">
-      <img src="{{ url_for('static', filename='img/cars/carromisterio.webp') }}" alt="{{ veiculo.marca }} {{ veiculo.modelo }}">
-
+      <img src="{{ url_for('foto_veiculo', id_veiculo=veiculo.id_veiculo) }}" class="carro" alt="{{ veiculo.marca }} {{ veiculo.modelo }}">
       <h3>{{ veiculo.marca }} {{ veiculo.modelo }}</h3>
 
       <p>R$ {{ "%.2f"|format(veiculo.valor_diario) }}/dia</p>
+      
     </section>
 
     <form action="{{ url_for('reserva', id_veiculo=veiculo.id_veiculo) }}" method="POST">
@@ -57,7 +59,7 @@
       <label for="plano">Observações</label>
       <input type="text" id="plano" name="plano" placeholder="Observações adicionais">
 
-      <!-- IMPORTANTE: CARREGAR QUAL VEÍCULO TÁ SENDO RESERVADO -->
+      <!-- importante: esse input ira carregar o id do veiculo selecionado pela página ate a outra -->
       <input type="hidden" name="id_veiculo" value="{{ veiculo.id_veiculo }}">
 
       <button type="submit">Confirmar Reserva</button>

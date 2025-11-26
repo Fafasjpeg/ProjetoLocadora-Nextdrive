@@ -1,4 +1,4 @@
-/* ======== GERAL ======== */
+/*  geral */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -9,7 +9,7 @@ body {
   min-height: 100vh;
 }
 
-/* ======== CABEÇALHO ======== */
+/* cabecalho */
 header {
   background: #1e1e2f;
   color: white;
@@ -17,79 +17,81 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  position: relative;
+}
+
+header a {
+  position: absolute;
+  left: 20px;
+  display: flex;
+  align-items: center;
 }
 
 .logo {
   width: 50px;
   height: 50px;
-  position: absolute;
-  left: 30px;
 }
 
-/* Centraliza o título */
+/* titulo central */
 header h1 {
   margin: 0;
   font-size: 1.6rem;
-  text-align: center;
 }
 
-/* ======== CONTEÚDO PRINCIPAL ======== */
+/* conteudo central */
 main {
   flex: 1;
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 20px;
+  padding: 40px 20px;
 }
 
-a{
-  text-decoration: none;
-  color: #2563EB;
-  font-weight: bold;
-  margin-bottom: 10px;
-  padding: 15px;
-}
-a:hover {
-  text-decoration: underline;
-
-}
-
+/* card perfil */
 .perfil-card {
   background: white;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 0 12px rgba(0,0,0,0.1);
-  max-width: 400px;
   width: 100%;
-  text-align: center;
+  max-width: 480px;
+  padding: 35px;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.12);
+  animation: fadeIn 0.4s ease;
 }
 
-/* ======== FOTO DE PERFIL ======== */
+/* foto do perfil */
 .foto-perfil {
   display: flex;
   justify-content: center;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .foto-perfil img {
-  width: 300px;       
-  height: 300px;       
-  object-fit: cover;   
-  border-radius: 50%;  
-  border: 4px solid #d8e0f1;
-  background-color: #E5E7EB;
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #2563EB22;
+  background: #E5E7EB;
 }
 
-/* ======== INFORMAÇÕES ======== */
+/* titulo */
 .perfil-card h2 {
   color: #2563EB;
+  margin: 10px 0 20px;
+  text-align: center;
+}
+
+/* info usuario */
+.info {
+  background: #F9FAFB;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #E5E7EB;
   margin-bottom: 20px;
 }
 
 .info p {
-  font-size: 1em;
-  margin: 8px 0;
+  margin: 10px 0;
+  font-size: 1rem;
   color: #444;
 }
 
@@ -97,24 +99,68 @@ a:hover {
   color: #111;
 }
 
-/* ======== BOTÃO ======== */
-.btn-voltar {
-  display: inline-block;
-  background: #22C55E;
-  color: white;
+/* links adicionais */
+.perfil-card a {
+  display: block;
   text-decoration: none;
-  padding: 10px 16px;
-  border-radius: 6px;
+  color: #2563EB;
   font-weight: bold;
-  margin-top: 20px;
-  transition: background 0.3s;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 8px;
+  transition: 0.2s;
+}
+
+.perfil-card a:hover {
+  background: #E6F0FF;
+  text-decoration: underline;
+}
+
+/* Lista de aluguéis */
+h3 {
+  margin-top: 30px;
+  text-align: center;
+  color: #1e1e2f;
+}
+
+.lista-alugueis {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+}
+
+.item-aluguel {
+  background: #ffffff;
+  padding: 15px 18px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #dbe2f0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.item-aluguel p {
+  margin: 6px 0;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+/* Botão voltar sobrepondo o link normal */
+.btn-voltar {
+  display: inline-block !important;
+  background: #22C55E !important;
+  color: white !important;
+  padding: 12px 18px !important;
+  border-radius: 8px !important;
+  margin-top: 20px !important;
+  font-weight: bold !important;
+  text-decoration: none !important;
 }
 
 .btn-voltar:hover {
-  background: #16A34A;
+  background: #16A34A !important;
 }
 
-/* ======== RODAPÉ ======== */
+/* footer */
 footer {
   background: #2563EB;
   color: white;
@@ -123,3 +169,49 @@ footer {
   margin-top: auto;
 }
 
+/* mensagens flash */
+.flash {
+  padding: 12px 15px;
+  margin: 10px auto;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 14px;
+  animation: fadeIn 0.4s ease;
+  text-align: center;
+}
+
+/* sucess */
+.flash.success {
+  background: #d1fae5;
+  color: #065f46;
+  border-left: 4px solid #059669;
+}
+
+/* erro */
+.flash.error {
+  background: #fee2e2;
+  color: #991b1b;
+  border-left: 4px solid #dc2626;
+}
+
+/* aviso */
+.flash.warning {
+  background: #fef3c7;
+  color: #92400e;
+  border-left: 4px solid #f59e0b;
+}
+
+/* info */
+.flash.info {
+  background: #dbeafe;
+  color: #1e40af;
+  border-left: 4px solid #2563eb;
+}
+
+/* animacao */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}

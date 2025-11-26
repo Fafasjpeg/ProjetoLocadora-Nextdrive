@@ -1,4 +1,4 @@
-/* ===== GERAL ===== */
+/* Geral */
 body {
   font-family: "Segoe UI", Arial, sans-serif;
   margin: 0;
@@ -9,7 +9,7 @@ body {
   min-height: 100vh;
 }
 
-/* ===== CABEÇALHO ===== */
+/* cabecalho */
 header {
   background-color: #1e1e2f;
   color: white;
@@ -33,7 +33,16 @@ header h1 {
   text-align: center;
 }
 
-/* ===== CONTEÚDO ===== */
+header a {
+  display: flex;
+  align-items: center;
+}
+
+header a .logo {
+  display: block;
+}
+
+/* conteudo */
 main {
   flex: 1;
   display: flex;
@@ -63,7 +72,7 @@ h2 {
   line-height: 1.5;
 }
 
-/* ===== TEXTO ===== */
+/* textos */
 .texto-termos p {
   text-align: justify;
   line-height: 1.7;
@@ -84,7 +93,7 @@ h2 {
   margin-bottom: 8px;
 }
 
-/* ===== BOTÃO VOLTAR ===== */
+/* voltar */
 .btn-voltar {
   display: inline-block;
   background-color: #2563eb;
@@ -101,7 +110,7 @@ h2 {
   background-color: #1e40af;
 }
 
-/* ===== RODAPÉ ===== */
+/* footer */
 footer {
   background-color: #1e1e2f;
   color: white;

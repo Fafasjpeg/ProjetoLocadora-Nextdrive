@@ -1,5 +1,6 @@
 from datetime import datetime, date
 
+#validacao de idade para cadastro
 def calcular_idade(data_nascimento):
     hoje = date.today()
     idade = hoje.year - data_nascimento.year

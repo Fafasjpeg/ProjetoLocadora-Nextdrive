@@ -1,67 +1,133 @@
-/* ===== GERAL ===== */
+/* geral */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  background-color: #f3f4f6;
+  background: #F3F4F6;
   color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-/* ===== CABEÇALHO ===== */
+/* cabecalho */
 header {
+  background: #1e1e2f;
+  color: white;
+  padding: 15px 20px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
-  background-color: #1e1e2f;
-  color: white;
-  padding: 15px;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
+/* logo */
 .logo {
   width: 50px;
   height: 50px;
-  position: absolute;
-  left: 30px;
+  border-radius: 50%;
 }
 
-/* Centraliza o título */
+/* titulo */
 header h1 {
   margin: 0;
-  font-size: 1.6rem;
+  font-size: 1.8em;
+}
+
+/* nav */
+nav {
+  display: flex;
+  gap: 15px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 6px 10px;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+nav a:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* conteudo principal */
+main {
+  flex: 1;
+  padding: 20px;
   text-align: center;
 }
 
-/* ===== GRID DE CARROS ===== */
-main {
+/* intro */
+.intro h2 {
+  color: #2563EB;
+  font-size: 1.8em;
+  margin-bottom: 8px;
+}
+
+.intro p {
+  color: #555;
+  margin-bottom: 25px;
+}
+
+/* filtros */
+.filtros {
   display: flex;
   justify-content: center;
-  padding: 40px 20px;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
 }
 
-.grid {
+.filtros select {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 180px;
+  box-sizing: border-box;
+}
+
+.filtros button {
+  background: #22C55E;
+  color: white;
+  border: none;
+  padding: 9px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.filtros button:hover {
+  background: #16A34A;
+}
+
+/* lista de veiculos */
+.veiculos {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 25px;
-  width: 100%;
-  max-width: 1100px;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 20px;
+  justify-items: center;
 }
 
-/* ===== CARD DO CARRO ===== */
+/* card */
 .carro {
   background: white;
-  border-radius: 10px;
+  border-radius: 12px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  padding: 15px;
+  width: 100%;
+  max-width: 250px;
   text-align: center;
-  padding: 20px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .carro:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-/* ===== IMAGEM DO CARRO ===== */
+/* imagem */
 .carro img {
   width: 100%;
   height: 180px;
@@ -69,47 +135,98 @@ main {
   border-radius: 10px;
 }
 
-/* ===== TÍTULO E PREÇO ===== */
+/* titulo do carro */
 .carro h3 {
-  color: #2563eb;
-  margin: 15px 0 5px;
+  color: #2563EB;
+  margin: 8px 0 4px;
 }
 
+/* preco */
 .carro p {
-  font-size: 1.1em;
-  color: #444;
-  margin-bottom: 15px;
+  color: #333;
+  margin-bottom: 10px;
 }
 
-/* ===== BOTÃO ===== */
-.carro .btn {
-  background-color: #22c55e;
+/* botao */
+.carro a {
+  display: inline-block;
+  background: #3B82F6;
   color: white;
-  padding: 10px 20px;
-  border-radius: 6px;
   text-decoration: none;
+  padding: 9px 14px;
+  border-radius: 6px;
+  transition: background 0.3s;
   font-weight: bold;
-  transition: background-color 0.3s;
 }
 
-.carro .btn:hover {
-  background-color: #16a34a;
+.carro a:hover {
+  background: #2563EB;
 }
 
-.btn-reservar {
-  background-color: #3b82f6;
+/* footer */
+footer {
+  background: #2563EB;
   color: white;
-  padding: 10px 20px;
-  border-radius: 6px;
+  text-align: center;
+  padding: 10px;
+  margin-top: auto;
+}
+
+footer a {
+  color: white;
   text-decoration: none;
+}
+
+footer a:hover {
+  background-color: #fff;
+  color: #2563EB;
+  padding: 5px 12px;
+  border-radius: 8px;
+}
+
+/* mensagens padrao flash */
+.flash {
+  padding: 12px 15px;
+  margin: 10px auto;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 8px;
   font-weight: bold;
-  transition: background-color 0.3s;
+  font-size: 14px;
+  animation: fadeIn 0.4s ease;
+  text-align: center;
 }
 
-.voltar{
-  text-decoration: none;
-  background-color: #2563EB;
-  padding: 9px;
-  border-radius: 6px;
-  color: white;
+/* sucess */
+.flash.success {
+  background: #d1fae5;
+  color: #065f46;
+  border-left: 4px solid #059669;
+}
+
+/* erro */
+.flash.error {
+  background: #fee2e2;
+  color: #991b1b;
+  border-left: 4px solid #dc2626;
+}
+
+/* aviso */
+.flash.warning {
+  background: #fef3c7;
+  color: #92400e;
+  border-left: 4px solid #f59e0b;
+}
+
+/* info */
+.flash.info {
+  background: #dbeafe;
+  color: #1e40af;
+  border-left: 4px solid #2563eb;
+}
+
+/* animacao */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
 }

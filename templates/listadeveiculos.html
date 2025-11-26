@@ -3,18 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lista de Veículos</title>
+  <title>Lista de Veículos - NextDrive</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/listadeveiculos.css') }}">
 </head>
 <body>
+
   <header>
-    <img src="{{ url_for('static', filename='img/imglogo.png') }}" class="logo" alt="Logo">
-    <h1>Lista de Veículos</h1><a href="/home" class="voltar">Voltar para Home</a>
+    <a href="{{ url_for('home') }}">
+      <img src="{{ url_for('static', filename='img/imglogo.png') }}" alt="Logo" class="logo">
+    </a>
+    <h1>NextDrive</h1>
+
+    <nav>
+      <a href="{{ url_for('perfil') }}" style="background:#007bff; border-radius:5px;">Conta</a>
+    </nav>
   </header>
-    <div>
-      
-    </div>
-  <p>
+
+  <main>
+
+    <section class="intro">
+      <h2>Lista de Veículos</h2>
+      <p>Escolha um carro e veja seus detalhes!</p>
+    </section>
+
+    <p>
     {% with mensagens = get_flashed_messages(with_categories=true) %}
       {% if mensagens %}
         {% for categoria, msg in mensagens %}
@@ -22,27 +34,52 @@
         {% endfor %}
       {% endif %}
     {% endwith %}
-  </p>
+    </p>
 
-  <main>
-    <div class="grid">
+    <div class="filtros">
+      <form action="/listadeveiculos" method="get">
 
+        <label for="categoria">Filtrar por categoria:</label>
+        
+        <select name="categoria" id="categoria">
+          <option value="" {% if not categoria %}selected{% endif %}>Todas</option>
+          <option value="SUV" {% if categoria == "SUV" %}selected{% endif %}>SUV</option>
+          <option value="Sedan" {% if categoria == "Sedan" %}selected{% endif %}>Sedan</option>
+          <option value="Hatch" {% if categoria == "Hatch" %}selected{% endif %}>Hatch</option>
+          <option value="Luxo" {% if categoria == "Luxo" %}selected{% endif %}>Luxo</option>
+        </select>
+
+        <button type="submit">Filtrar</button>
+
+      </form>
+    </div>
+
+    <section class="veiculos">
       {% for v in veiculos %}
       <div class="carro">
-          <!-- IMAGEM DO VEÍCULO VINDO DO BANCO -->
-          <img src="{{ url_for('foto_veiculo', id_veiculo=v.id_veiculo) }}" alt="{{ v.marca }} {{ v.modelo }}">
+
+          <img src="{{ url_for('foto_veiculo', id_veiculo=v.id_veiculo) }}" 
+              alt="{{ v.marca }} {{ v.modelo }}">
 
           <h3>{{ v.marca }} {{ v.modelo }}</h3>
 
           <p>R$ {{ "%.2f"|format(v.valor_diario) }}/dia</p>
 
-          <a href="{{ url_for('reserva', id_veiculo=v.id_veiculo) }}" class="btn-reservar">
-            Reservar
+          <a href="{{ url_for('veiculo', id_veiculo=v.id_veiculo) }}" class="btn-reservar">
+            Detalhes
           </a>
+
       </div>
       {% endfor %}
+    </section>
 
-    </div>
   </main>
+
+  <footer>
+    <p><a href="/home" class="lista">Voltar para Home</a></p><br>
+    
+    <p>&copy; 2025 NextDrive</p>
+  </footer>
+
 </body>
 </html>

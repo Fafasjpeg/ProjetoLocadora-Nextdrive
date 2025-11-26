@@ -8,7 +8,6 @@
 </head>
 
 <body>
-  <!-- ======== CABEÇALHO ======== -->
   <header>
     <div style="display: flex; align-items: center; gap: 10px;">
       <img src="{{ url_for('static', filename='img/imglogo.png') }}" alt="Logo" class="logo">
@@ -17,7 +16,7 @@
 
     <nav>
       <a href="{{ url_for('home') }}">Home</a>
-      <a href="{{ url_for('dashboard') }}">Dashboard</a>
+      <a href="{{ url_for('dashboard') }}" style="background:#007bff; border-radius:5px;">Dashboard</a>
       <a href="{{ url_for('cadastroadm') }}">Empregados</a>
       <a href="{{ url_for('cadastrofornecedor') }}">Fornecedores</a>
       <a href="{{ url_for('cadastrodepartamento') }}">Departamentos</a>
@@ -27,12 +26,11 @@
     </nav>
   </header>
 
-  <!-- ======== CONTEÚDO PRINCIPAL ======== -->
   <main>
 
     <section class="intro">
       <h2>Bem-vindo ao Painel Administrativo</h2>
-      <p>Gerencie empregados, fornecedores, cargos, departamentos e muito mais.</p>
+      <p>Cadastre empregados, fornecedores, cargos, departamentos, serviços, agencias e veiculos e tenha acesso aos números.</p>
       <p>
       {% with mensagens = get_flashed_messages(with_categories=true) %}
         {% if mensagens %}
@@ -44,13 +42,12 @@
       </p>
     </section>
 
-    <!-- ======== CARDS PRINCIPAIS ======== -->
     <div class="veiculos">
 
-      <div class="carro"> <!-- copia formatacao dos veiculos da home original do cliente-->
+      <div class="carro"> <!-- copia formatacao dos carros da home original do cliente pra n precisar fazer outro css -->
         <img src="{{ url_for('static', filename='img/adm_empregado.png') }}" alt="Empregados">
         <h3>Empregados</h3>
-        <p>Gerencie todo o cadastro de funcionários.</p>
+        <p>Cadastre os funcionários da empresa.</p>
         <a href="{{ url_for('cadastroadm') }}">Acessar</a>
       </div>
 
@@ -78,30 +75,36 @@
       <div class="carro">
         <img src="{{ url_for('static', filename='img/adm_agencia.png') }}" alt="Agencias">
         <h3>Agencias</h3>
-        <p>Cadastro e controle de agências da empresa.</p>
+        <p>Cadastre e controle de agências da empresa.</p>
         <a href="{{ url_for('cadastroagencia') }}">Acessar</a>
       </div>
 
       <div class="carro">
-        <img src="{{ url_for('static', filename='img/adm_veiculo.png') }}" alt="Agencias">
+        <img src="{{ url_for('static', filename='img/adm_veiculo.png') }}" alt="Veiculos">
         <h3>Veículos</h3>
-        <p>Cadastro e controle de veículos da empresa.</p>
+        <p>Cadastro e controle de veículos fornecidos pela empresa.</p>
         <a href="{{ url_for('cadastroveiculo') }}">Acessar</a>
       </div>
 
       <div class="carro">
-        <img src="{{ url_for('static', filename='img/adm_servico.png') }}" alt="Agencias">
+        <img src="{{ url_for('static', filename='img/adm_servico.png') }}" alt="Servicos">
         <h3>Serviços</h3>
         <p>Cadastro e controle de serviços realizado nos carros da empresa.</p>
         <a href="{{ url_for('cadastroservico') }}">Acessar</a>
       </div>
 
+      <div class="carro">
+        <img src="{{ url_for('static', filename='img/adm_dashboard.png') }}" alt="Dashboard">
+        <h3>Dashboard</h3>
+        <p>Tenha acesso aos números e ao controle da empresa.</p>
+        <a href="{{ url_for('dashboard') }}">Acessar</a>
+      </div>
+
     </div>
   </main>
 
-  <!-- ======== RODAPÉ ======== -->
   <footer>
-    <p>© 2025 - Painel Administrativo | Todos os direitos reservados.</p>
+    <p>© 2025 - Painel Administrativo | NextDrive</p>
   </footer>
 
 </body>

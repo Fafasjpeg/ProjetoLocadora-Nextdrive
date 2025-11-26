@@ -11,15 +11,14 @@
     <img src="{{ url_for('static', filename='img/imglogo.png') }}" alt="Logo" class="logo">
     <h1>NextDrive</h1>
     <nav>
-      <a href="/perfil">Conta</a>
-      <!--ver se coloca cadastro ou login e como ver isso ai-->
+      <a href="{{ url_for('perfil') }}" style="background:#007bff; border-radius:5px;">Perfil</a>
     </nav>
   </header>
 
   <main>
     <section class="intro">
       <h2>Encontre seu próximo carro</h2>
-      <p>Escolha um veículo e faça sua reserva rapidamente.</p>
+      <p>Escolha um veículo e faça sua reserva o mais rápido possível!</p>
     </section>
     <p>
     {% with mensagens = get_flashed_messages(with_categories=true) %}
@@ -52,7 +51,6 @@
     <section class="veiculos">
       {% for v in veiculos %}
       <div class="carro">
-          <!-- IMAGEM DO VEÍCULO -->
           <img src="{{ url_for('foto_veiculo', id_veiculo=v.id_veiculo) }}" 
               alt="{{ v.marca }} {{ v.modelo }}">
 
@@ -60,8 +58,8 @@
 
           <p>R$ {{ "%.2f"|format(v.valor_diario) }}/dia</p>
 
-          <a href="{{ url_for('reserva', id_veiculo=v.id_veiculo) }}" class="btn-reservar">
-            Reservar
+          <a href="{{ url_for('veiculo', id_veiculo=v.id_veiculo) }}" class="btn-reservar">
+            Detalhes
           </a>
       </div>
       {% endfor %}

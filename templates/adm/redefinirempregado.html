@@ -8,13 +8,15 @@
 </head>
 <body>
   <header>
-    <img src="{{ url_for('static', filename='img/imglogo.png') }}" alt="Logo da Locadora" class="logo">
-    <h1>Redefinir Senha</h1>
+    <a href="{{ url_for('homeadm') }}">
+      <img src="{{ url_for('static', filename='img/imglogo.png') }}" alt="Logo" class="logo">
+    </a>
+    <h1>NextDrive</h1>
   </header>
 
   <main>
     <section class="container">
-      <h2>Crie uma nova senha</h2>
+      <h2>Crie uma nova senha para sua Conta de Administração</h2>
       <p>Insira uma nova senha segura para sua conta.</p>
       <p>{% with mensagens = get_flashed_messages(with_categories=true) %}
         {% if mensagens %}
@@ -57,6 +59,7 @@
   </footer>
 
   <script>
+    // mostrar/ocultar senha
     function togglePassword(id, button) {
       const input = document.getElementById(id);
       const isPassword = input.type === "password";
