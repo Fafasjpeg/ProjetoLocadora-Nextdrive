@@ -9,8 +9,10 @@
 
 <body>
   <header>
-    <img src="{{ url_for('static', filename='img/imglogo.png') }}" alt="Logo da Locadora" class="logo">
-    <h1>Painel Administrativo - NextDrive</h1>
+    <a href="{{ url_for('home') }}">
+      <img src="{{ url_for('static', filename='img/imglogo.png') }}" alt="Logo" class="logo">
+    </a>
+    <h1>NextDrive</h1>
   </header>
 
   <main>
@@ -43,7 +45,6 @@
     </form>
     <p class="cadastro">Não tem uma conta Administrativa?<a href="/cadastroadm"> Crie uma!</a></p>
     <p class="cadastro">Esqueceu a sua senha?<a href="/redefinirsenhaempregado"> Redefina-a!</a></p>
-    <p class="cadastro">Voltar pra<a href="/home"> Home</a></p>
 
     <p class="cadastro">
       Acesso permitido apenas para funcionários autorizados.

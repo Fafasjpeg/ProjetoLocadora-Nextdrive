@@ -89,7 +89,7 @@ main {
 }
 
 .filtros button {
-  background: #22C55E;
+  background: #0EA5E9;
   color: white;
   border: none;
   padding: 9px 14px;
@@ -99,7 +99,7 @@ main {
 }
 
 .filtros button:hover {
-  background: #16A34A;
+  background: #0a90ce;
 }
 
 /* lista de veiculos */
@@ -150,7 +150,7 @@ main {
 /* botao */
 .carro a {
   display: inline-block;
-  background: #3B82F6;
+  background: #0EA5E9;
   color: white;
   text-decoration: none;
   padding: 9px 14px;
@@ -160,7 +160,7 @@ main {
 }
 
 .carro a:hover {
-  background: #2563EB;
+  background: #0b91cf;
 }
 
 /* footer */

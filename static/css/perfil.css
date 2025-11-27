@@ -147,7 +147,7 @@ h3 {
 /* Botão voltar sobrepondo o link normal */
 .btn-voltar {
   display: inline-block !important;
-  background: #22C55E !important;
+  background: #0EA5E9 !important;
   color: white !important;
   padding: 12px 18px !important;
   border-radius: 8px !important;
@@ -157,7 +157,7 @@ h3 {
 }
 
 .btn-voltar:hover {
-  background: #16A34A !important;
+  background: #0994d4 !important;
 }
 
 /* footer */

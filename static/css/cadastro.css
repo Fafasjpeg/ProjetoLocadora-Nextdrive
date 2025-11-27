@@ -108,7 +108,7 @@ input:hover {
 }
 
 button {
-  background: #22C55E;
+  background: #0EA5E9;
   color: white;
   border: none;
   padding: 10px;
@@ -119,7 +119,7 @@ button {
 }
 
 button:hover {
-  background: #16A34A;
+  background: #0d93d1;
 }
 
 .password-wrapper {

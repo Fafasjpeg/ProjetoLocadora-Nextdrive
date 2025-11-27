@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landing Page - NextDrive</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/landingpage.css') }}">
+</head>
+<body>
+  <header>
+    <img src="{{ url_for('static', filename='img/imglogo.png') }}" alt="Logo" class="logo">
+    <h1>NextDrive</h1>
+    <nav>
+      <a href="{{ url_for('home') }}" style="background:#007bff; border-radius:5px;">Entrar</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h2>Bem-vindo à NextDrive</h2>
+      <p>Alugue o carro dos seus sonhos com facilidade e rapidez. Explore nossas opções e reserve agora!</p>
+      <a href="{{ url_for('home') }}" class="btn-cta">Ver Veículos Disponíveis</a>
+    </section>
+
+    <section class="beneficios">
+      <h3>Por que escolher a NextDrive?</h3>
+      <div class="beneficio">
+        <h4>Variedade de Veículos</h4>
+        <p>De SUVs a carros de luxo, temos opções para todos os gostos e necessidades.</p>
+      </div>
+      <div class="beneficio">
+        <h4>Reserva Rápida</h4>
+        <p>Faça sua reserva em minutos e pegue seu carro no mesmo dia.</p>
+      </div>
+      <div class="beneficio">
+        <h4>Preços Competitivos</h4>
+        <p>Economize com nossas tarifas diárias acessíveis e sem taxas ocultas.</p>
+      </div>
+      <div class="beneficio">
+        <h4>Suporte rápido</h4>
+        <p>Em caso de dúvida, seja atendido o mais rápido possível pela nossa equipe.</p>
+      </div>
+      <div class="beneficio">
+        <h4>Email de Confirmação</h4>
+        <p>Ao completar o pagamento, um voucher da reserva com todas as informações é enviado para você, por email.</p>
+      </div>
+    </section>
+
+    <section class="cta-final">
+      <h3>Pronto para dirigir?</h3>
+      <p>Entre em contato ou explore nossa frota agora mesmo.</p>
+      <a href="{{ url_for('contato') }}" class="btn-cta">Fale Conosco</a>
+    </section>
+  </main>
+
+  <footer>
+    <p><a href="/listadeveiculos" class="lista">Ir para lista de Veículos</a></p><br>
+    <p><a href="/termos">Termos</a> & <a href="/privacidade">Privacidade</a> & <a href="/contato">Contato</a></p>
+    <p>&copy; 2025 NextDrive</p>
+  </footer>
+</body>
+</html>

@@ -22,7 +22,7 @@ operacao = Operacao()
 
 @app.route("/")
 def base():
-    return redirect(url_for('home'))
+    return redirect(url_for('nextdrive'))
 
 @app.route("/index")
 def index():
@@ -44,6 +44,9 @@ def foto_veiculo(id_veiculo):
     # retorna a imagem 
     return Response(veiculo.foto, mimetype="image/jpeg")
 
+@app.route("/nextdrive")
+def nextdrive():
+    return render_template('landingpage.html')
 
 @app.route("/home")
 def home():
@@ -153,7 +156,7 @@ def contato():
 
         # envia usando sua função
         status, retorno = enviar_email_confirmacao(
-            api_key='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', # deveria estar no .env porem o problema de envio persiste mesmo com a chave correta
+            api_key='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', # a chave devera ser alterada toda vez que for feito um commit
             destino=destino,
             assunto=f"Novo contato do site - {nome}",
             html=html_email
@@ -526,7 +529,7 @@ def pagamento():
 
         # envia o email usando Brevo
         status, resposta = enviar_email_confirmacao(
-            api_key='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', # deveria pegar api key do .env porem n ta funcionando
+            api_key='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', # a chave devera ser alterada toda vez que for feito um commit
             destino=cliente.email,
             assunto="Confirmação da Reserva - NextDrive",
             html=html_email
@@ -573,8 +576,6 @@ def limpa_sessoes():
     # limpa todas as sessoes de aluguel e pagamento e joga pra home
     session.pop('aluguel_id', None)
     session.pop('pagamento_id', None)
-    
-    flash("Sessões de aluguel e pagamento limpas.", "success")
     
     return redirect(url_for('home'))
 

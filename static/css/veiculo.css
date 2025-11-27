@@ -94,7 +94,7 @@ header a .logo {
 .btn-reservar {
   display: block;
   text-align: center;
-  background: #007bff;
+  background: #0EA5E9;
   color: #fff;
   padding: 12px;
   margin-top: 25px;
@@ -104,7 +104,7 @@ header a .logo {
 }
 
 .btn-reservar:hover {
-  background: #0056b3;
+  background: #0795d6;
 }
 
 /* rodape */

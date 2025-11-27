@@ -87,7 +87,7 @@ main {
 }
 
 .filtros button {
-  background: #22C55E;
+  background: #0EA5E9;
   color: white;
   border: none;
   padding: 9px 14px;
@@ -151,7 +151,7 @@ main {
 
 .carro a {
   display: inline-block;
-  background: #22C55E;
+  background: #0EA5E9;
   color: white;
   text-decoration: none;
   padding: 8px 12px;
@@ -160,7 +160,7 @@ main {
 }
 
 .carro a:hover {
-  background: #16A34A;
+  background: #0684be;
 }
 
 /* footer */
